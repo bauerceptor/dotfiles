@@ -237,5 +237,11 @@
   "editor.largeFileOptimizations": true,
   "editor.maxTokenizationLineLength": 20000,
   "workbench.list.smoothScrolling": true,
-  "workbench.reduceMotion": "off"
+  "workbench.reduceMotion": "off",
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  }
 }
