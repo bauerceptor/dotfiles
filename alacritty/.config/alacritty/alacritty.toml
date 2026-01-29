@@ -1,0 +1,429 @@
+# ~/.config/alacritty/alacritty.toml
+
+[general]
+live_config_reload = true
+
+[terminal.shell]
+program = "/bin/bash"
+args = ["--login"]
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+decorations = "full"
+dynamic_padding = true
+opacity = 0.97
+title = "Terminal"
+
+[window.padding]
+x = 12
+y = 8
+
+[window.dimensions]
+columns = 140
+lines = 40
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[scrolling]
+history = 10000
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Beam", blinking = "Off" }
+unfocused_hollow = true
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Plus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Control"
+
+
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║                              THEMES                                       ║
+# ║  Uncomment ONE theme section below. Comment out all others.               ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🌸 SAKURA - Soft cherry blossom pinks, gentle and dreamy
+# ─────────────────────────────────────────────────────────────────────────────
+
+[colors.primary]
+background = "#1a1521"
+foreground = "#e8d4d4"
+
+[colors.cursor]
+text = "#1a1521"
+cursor = "#f4a7b9"
+
+[colors.vi_mode_cursor]
+text = "#1a1521"
+cursor = "#f4a7b9"
+
+[colors.selection]
+text = "#1a1521"
+background = "#f4a7b9"
+
+[colors.search.matches]
+foreground = "#1a1521"
+background = "#d4a5a5"
+
+[colors.search.focused_match]
+foreground = "#1a1521"
+background = "#f4a7b9"
+
+[colors.normal]
+black   = "#2a1f2d"
+red     = "#e84a5f"
+green   = "#a8e6cf"
+yellow  = "#ffaaa5"
+blue    = "#a8a4ce"
+magenta = "#f4a7b9"
+cyan    = "#c9b1ff"
+white   = "#e8d4d4"
+
+[colors.bright]
+black   = "#4a3f4d"
+red     = "#ff6b81"
+green   = "#bef0db"
+yellow  = "#ffc3bf"
+blue    = "#beb8db"
+magenta = "#ffb7c5"
+cyan    = "#d9c7ff"
+white   = "#fff0f0"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🍒 CHERRY - Deep, rich reds and warm burgundy tones
+# ─────────────────────────────────────────────────────────────────────────────
+
+# [colors.primary]
+# background = "#1a0f0f"
+# foreground = "#e8d0c8"
+
+# [colors.cursor]
+# text = "#1a0f0f"
+# cursor = "#c94c4c"
+
+# [colors.vi_mode_cursor]
+# text = "#1a0f0f"
+# cursor = "#c94c4c"
+
+# [colors.selection]
+# text = "#1a0f0f"
+# background = "#8b3a3a"
+
+# [colors.search.matches]
+# foreground = "#1a0f0f"
+# background = "#a85050"
+
+# [colors.search.focused_match]
+# foreground = "#1a0f0f"
+# background = "#c94c4c"
+
+# [colors.normal]
+# black   = "#2a1515"
+# red     = "#c94c4c"
+# green   = "#8fbc8f"
+# yellow  = "#d4a574"
+# blue    = "#8b7b8b"
+# magenta = "#a85050"
+# cyan    = "#b08080"
+# white   = "#e8d0c8"
+
+# [colors.bright]
+# black   = "#4a2525"
+# red     = "#e05555"
+# green   = "#a5d6a5"
+# yellow  = "#e8b888"
+# blue    = "#a090a0"
+# magenta = "#c06060"
+# cyan    = "#c89595"
+# white   = "#fff5f0"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🏜️ SAND - Warm desert tones, soft beiges and terracotta
+# ─────────────────────────────────────────────────────────────────────────────
+
+# [colors.primary]
+# background = "#1c1814"
+# foreground = "#e6dcd3"
+
+# [colors.cursor]
+# text = "#1c1814"
+# cursor = "#c4a35a"
+
+# [colors.vi_mode_cursor]
+# text = "#1c1814"
+# cursor = "#c4a35a"
+
+# [colors.selection]
+# text = "#1c1814"
+# background = "#8b7355"
+
+# [colors.search.matches]
+# foreground = "#1c1814"
+# background = "#a08060"
+
+# [colors.search.focused_match]
+# foreground = "#1c1814"
+# background = "#c4a35a"
+
+# [colors.normal]
+# black   = "#2d2520"
+# red     = "#c07860"
+# green   = "#a6b58a"
+# yellow  = "#c4a35a"
+# blue    = "#8a9eb5"
+# magenta = "#b09080"
+# cyan    = "#90a5a0"
+# white   = "#e6dcd3"
+
+# [colors.bright]
+# black   = "#4d4035"
+# red     = "#d48870"
+# green   = "#b8c79c"
+# yellow  = "#d4b56a"
+# blue    = "#9aaec5"
+# magenta = "#c0a090"
+# cyan    = "#a0b5b0"
+# white   = "#faf4ef"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🌲 FOREST - Deep greens, earthy moss, and woodland tones
+# ─────────────────────────────────────────────────────────────────────────────
+
+# [colors.primary]
+# background = "#121a14"
+# foreground = "#d4e0d4"
+
+# [colors.cursor]
+# text = "#121a14"
+# cursor = "#7a9f7a"
+
+# [colors.vi_mode_cursor]
+# text = "#121a14"
+# cursor = "#7a9f7a"
+
+# [colors.selection]
+# text = "#121a14"
+# background = "#3d5c3d"
+
+# [colors.search.matches]
+# foreground = "#121a14"
+# background = "#5a7a5a"
+
+# [colors.search.focused_match]
+# foreground = "#121a14"
+# background = "#7a9f7a"
+
+# [colors.normal]
+# black   = "#1a261c"
+# red     = "#b07070"
+# green   = "#7a9f7a"
+# yellow  = "#b5a86a"
+# blue    = "#6a8a9f"
+# magenta = "#907a90"
+# cyan    = "#6a9a8a"
+# white   = "#d4e0d4"
+
+# [colors.bright]
+# black   = "#3a4a3c"
+# red     = "#c08080"
+# green   = "#8ab08a"
+# yellow  = "#c5b87a"
+# blue    = "#7a9aaf"
+# magenta = "#a08aa0"
+# cyan    = "#7aaa9a"
+# white   = "#e8f0e8"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🌸 SAKURA LIGHT - Daytime cherry blossom, soft and airy
+# ─────────────────────────────────────────────────────────────────────────────
+
+# [colors.primary]
+# background = "#fdf6f6"
+# foreground = "#4a3540"
+
+# [colors.cursor]
+# text = "#fdf6f6"
+# cursor = "#d47a8a"
+
+# [colors.vi_mode_cursor]
+# text = "#fdf6f6"
+# cursor = "#d47a8a"
+
+# [colors.selection]
+# text = "#fdf6f6"
+# background = "#f4c7d0"
+
+# [colors.search.matches]
+# foreground = "#fdf6f6"
+# background = "#e8a8b5"
+
+# [colors.search.focused_match]
+# foreground = "#fdf6f6"
+# background = "#d47a8a"
+
+# [colors.normal]
+# black   = "#4a3540"
+# red     = "#c24a5a"
+# green   = "#5a8a6a"
+# yellow  = "#b08040"
+# blue    = "#6a70a0"
+# magenta = "#a05a7a"
+# cyan    = "#507a80"
+# white   = "#f0e8e8"
+
+# [colors.bright]
+# black   = "#6a5560"
+# red     = "#d45a6a"
+# green   = "#6a9a7a"
+# yellow  = "#c09050"
+# blue    = "#7a80b0"
+# magenta = "#b06a8a"
+# cyan    = "#608a90"
+# white   = "#fdf6f6"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🏜️ SAND LIGHT - Sunlit desert, warm parchment tones
+# ─────────────────────────────────────────────────────────────────────────────
+
+# [colors.primary]
+# background = "#faf6f0"
+# foreground = "#4a4035"
+
+# [colors.cursor]
+# text = "#faf6f0"
+# cursor = "#a08050"
+
+# [colors.vi_mode_cursor]
+# text = "#faf6f0"
+# cursor = "#a08050"
+
+# [colors.selection]
+# text = "#faf6f0"
+# background = "#e0d0b8"
+
+# [colors.search.matches]
+# foreground = "#faf6f0"
+# background = "#d0c0a0"
+
+# [colors.search.focused_match]
+# foreground = "#faf6f0"
+# background = "#a08050"
+
+# [colors.normal]
+# black   = "#4a4035"
+# red     = "#a06050"
+# green   = "#6a8a5a"
+# yellow  = "#a08050"
+# blue    = "#5a7090"
+# magenta = "#8a6070"
+# cyan    = "#508080"
+# white   = "#f0e8e0"
+
+# [colors.bright]
+# black   = "#6a5a4a"
+# red     = "#b07060"
+# green   = "#7a9a6a"
+# yellow  = "#b09060"
+# blue    = "#6a80a0"
+# magenta = "#9a7080"
+# cyan    = "#609090"
+# white   = "#faf6f0"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🌲 FOREST LIGHT - Sunlit woodland, fresh spring greens
+# ─────────────────────────────────────────────────────────────────────────────
+
+# [colors.primary]
+# background = "#f4f8f4"
+# foreground = "#2a3a2c"
+
+# [colors.cursor]
+# text = "#f4f8f4"
+# cursor = "#5a8a5a"
+
+# [colors.vi_mode_cursor]
+# text = "#f4f8f4"
+# cursor = "#5a8a5a"
+
+# [colors.selection]
+# text = "#f4f8f4"
+# background = "#c0d8c0"
+
+# [colors.search.matches]
+# foreground = "#f4f8f4"
+# background = "#a0c0a0"
+
+# [colors.search.focused_match]
+# foreground = "#f4f8f4"
+# background = "#5a8a5a"
+
+# [colors.normal]
+# black   = "#2a3a2c"
+# red     = "#8a5050"
+# green   = "#5a8a5a"
+# yellow  = "#8a7a40"
+# blue    = "#4a6a8a"
+# magenta = "#7a5a7a"
+# cyan    = "#4a7a7a"
+# white   = "#e8f0e8"
+
+# [colors.bright]
+# black   = "#4a5a4c"
+# red     = "#9a6060"
+# green   = "#6a9a6a"
+# yellow  = "#9a8a50"
+# blue    = "#5a7a9a"
+# magenta = "#8a6a8a"
+# cyan    = "#5a8a8a"
+# white   = "#f4f8f4"

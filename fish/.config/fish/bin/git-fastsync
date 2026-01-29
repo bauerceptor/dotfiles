@@ -1,0 +1,343 @@
+#!/usr/bin/env bash
+# Commits, pulls and pushes in one go.
+set -eou pipefail
+
+# global options
+interactive=''
+dry_run=''
+use_amend=''
+no_commit=''
+commit_only=''
+watch_mode=''
+edit_mode=''
+watch_mode_wait_time='10'
+debounce_action_pid=''
+
+# Progress indicator helpers
+check="\033[32m✓"
+cross="\033[31m✗"
+reset="\033[0m"
+rewind="\033[4D\033[K\r" # Cursor back, erase in line, start
+
+show_help() {
+	echo "Usage: git-fastsync [options]"
+	echo "Commits, pulls and pushes in one go."
+	echo ""
+	echo "Options:"
+	echo "  -i, --interactive       Prompt for what to do"
+	echo "  -n, --dry-run           Simulation mode"
+	echo "      --commit-only       Don't push and pull"
+	echo "  -A, --amend             Amend the last commit"
+	echo "  -w, --watch             Rerun on file changes"
+	echo "      --edit              Commit using editor"
+	echo "  -W, --wait-for <secs>   Wait time for watch mode, implies -w"
+	echo ""
+	echo "  -h, --help              Show this help message and exit"
+}
+
+main() {
+	set_options_from_argv "$@"
+
+	do_fastsync
+
+	if [[ "$watch_mode" == "1" ]]; then
+		prog_info "Watching for changes with ${watch_mode_wait_time}sec delay"
+		prog_info "Press ctrl-c to stop"
+		monitor_for_changes | while read -r _update; do
+			debounced_do_fastsync
+		done
+	fi
+}
+
+monitor_for_changes() {
+	inotifywait --quiet --event modify,delete,create --monitor --recursive . --exclude "\\.git"
+}
+
+debounced_do_fastsync() {
+	# Check if running already
+	if test -n "${debounce_action_pid}" && ps -p "${debounce_action_pid}" >/dev/null; then
+		kill "${debounce_action_pid}"
+	fi
+
+	# Wait N seconds then trigger a run
+	(
+		sleep "$watch_mode_wait_time"
+		do_fastsync
+	) &
+
+	debounce_action_pid="${!}"
+}
+
+do_fastsync() {
+	if is_merge_ongoing; then
+		prog_err "ERR: merge is ongoing. Resolve this merge before continuing."
+		exit 1
+	fi
+
+	if is_rebase_ongoing; then
+		prog_err "ERR: rebase is ongoing. Resolve this rebase before continuing."
+		exit 1
+	fi
+
+	branch="$(git rev-parse --abbrev-ref HEAD)"
+	if [[ "$branch" == "HEAD" ]]; then
+		prog_err "ERR: not on a branch"
+		exit 1
+	fi
+
+	commit_if_dirty
+	if [[ "$commit_only" == '1' ]]; then return; fi
+
+	if [[ "$use_amend" == '1' ]]; then
+		push_updates '1'
+	else
+		prog_start 'Pull'
+		_git fetch
+		local upstream
+		upstream="$(get_upstream_reference)"
+
+		if [[ -n "$upstream" ]] && has_remote_branch "$upstream"; then
+			prog_ok
+			pull_changes "$upstream"
+		else
+			prog_ok
+		fi
+
+		push_updates
+	fi
+}
+
+set_options_from_argv() {
+	while true; do
+		case "${1:-}" in
+		-h | --help)
+			show_help
+			exit
+			;;
+		-w | --watch)
+			watch_mode='1'
+			shift 1
+			;;
+		--edit)
+			edit_mode='1'
+			shift 1
+			;;
+		-W | --wait-for)
+			watch_mode='1'
+			watch_mode_wait_time="$2"
+			shift 2
+			;;
+		-i | --interactive)
+			interactive='1'
+			shift 1
+			;;
+		--commit-only)
+			commit_only='1'
+			shift 1
+			;;
+		-A | --amend)
+			use_amend='1'
+			shift 1
+			;;
+		-n | --dry-run)
+			dry_run='1'
+			shift 1
+			;;
+		*) break ;;
+		esac
+	done
+}
+
+# Runs an interactive prompt
+interactive_prompt() {
+	while true; do
+		echo -ne "\033[2K\r"
+		if [[ "$verbose" == "" ]]; then
+			echo -ne "   [Enter] sync now, [d] show diff, [?] more options: "
+		else
+			echo -e 'Options:'
+			echo '  [enter] sync now'
+			echo '  [c] commit only'
+			echo '  [m] change message'
+			echo '  [A] amend'
+			echo '  [d] show diff'
+			echo '  [q] quit'
+			echo -n '> '
+		fi
+		read -n1 input
+
+		case "$input" in
+		'c' | '') # Continue
+			break ;;
+		d) # Diff
+			verbose='1'
+			clear
+			git diff HEAD
+			echo ''
+			;;
+		q) # Quit
+			exit 1 ;;
+		A) # Amend
+			use_amend='1'
+			break
+			;;
+		c) # Commit-only
+			commit_only='1'
+			break
+			;;
+		'?') # Verbose
+			verbose='1' ;;
+		m) # Commit message
+			echo ''
+			echo ''
+			echo -n 'Commit msg: '
+			read -r message
+			break
+			;;
+		*) ;;
+		esac
+	done
+	echo ''
+}
+
+commit_if_dirty() {
+	local message=''
+	local input=''
+	local verbose=''
+
+	if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then
+		prog_info 'No changes to commit'
+		no_commit='1'
+		return
+	fi
+
+	# Show status
+	if [[ "$watch_mode" != "1" ]]; then
+		prog_info "Local changes in $(pwd):"
+		git status -s
+		echo ''
+	fi
+
+	if [[ "$interactive" == '1' ]]; then
+		message="$(get_default_message || echo 'Update')"
+		prog_info "Commit msg: '$message'"
+		interactive_prompt
+	fi
+
+	_git add --all .
+	if [[ -z "$message" ]]; then
+		message="$(get_default_message || echo 'Update')"
+	fi
+
+	if [[ "$edit_mode" == '1' ]]; then
+		if [[ "$use_amend" == '1' ]]; then
+			git commit --amend -v
+		else
+			git commit -v
+		fi
+	else
+		if [[ "$use_amend" == '1' ]]; then
+			prog_info "Amend commit: ‘${message}’"
+			_git commit --amend -C HEAD
+		else
+			prog_info "Commit: ‘${message}’"
+			_git commit -m "$message"
+		fi
+	fi
+}
+
+# Generate a default commit message
+get_default_message() {
+	local message=''
+	local count=''
+	message="$(git status -s | head -n 1 | xargs)"
+	count="$(git status -s | wc -l | xargs)"
+	message="$(
+		echo "$message" |
+			sed 's/^M /Update /' |
+			sed 's/^R /Rename /' |
+			sed 's/^D /Delete /' |
+			sed 's/^A /Add /'
+	)"
+
+	if [[ -z "$message" ]]; then return 1; fi
+
+	# append count
+	if [[ "$count" != '1' ]]; then
+		message="$message (+$((count - 1)) more changes)"
+	fi
+
+	echo "$message"
+}
+
+# Pull changes
+pull_changes() {
+	local upstream="$1"
+
+	if ! _git rebase --quiet --autostash "$upstream"; then
+		prog_err "Failed to pull"
+		_git rebase --abort
+		exit 1
+	fi
+}
+
+# Push if there are any changes
+push_updates() {
+	local message=''
+	local force="${1:-}"
+
+	if [[ "$dry_run" == '1' ]] || is_push_needed; then
+		if [[ "$force" == '1' ]]; then
+			prog_start 'Force-push'
+			_git push --quiet --no-progress --force-with-lease
+			message="$(git log -1 --pretty='format:%s')"
+			prog_ok
+		else
+			prog_start 'Push'
+			_git push --quiet --no-progress
+			message="$(git log -1 --pretty='format:%s')"
+			prog_ok
+		fi
+	fi
+}
+
+is_merge_ongoing() {
+	test -f "$(git rev-parse --git-dir)/MERGE_HEAD"
+}
+
+is_rebase_ongoing() {
+	test -f "$(git rev-parse --git-dir)/rebase-merge"
+}
+
+has_remote_branch() {
+	git branch -a | grep -q "remotes/$(get_upstream_reference)"
+}
+
+is_push_needed() {
+	git status --branch -s | head -n 1 | grep -q ahead
+}
+
+# eg, origin/main
+# Returns blank if not available
+get_upstream_reference() {
+	git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo ''
+}
+
+# Runs a Git action. In dry run mode, it only prints
+_git() {
+	if [[ "$dry_run" == '1' ]]; then
+		echo -e "\n\033[32m$ git $*\033[0m"
+	else
+		git "$@" >/dev/null
+	fi
+}
+
+prog_start() { echo -ne "${rewind}$*... "; }
+prog_ok() { echo -e "\033[4D ${check}  ${reset}"; }
+prog_err() { echo -e "\n${reset}$* ${cross}${reset}"; }
+prog_info() {
+	prog_start "$*"
+	prog_ok
+}
+
+main "$@"

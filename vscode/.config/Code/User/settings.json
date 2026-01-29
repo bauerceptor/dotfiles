@@ -1,0 +1,241 @@
+{
+  // ═══════════════════════════════════════════════════════════════════════
+  // CURSOR
+  // ═══════════════════════════════════════════════════════════════════════
+  "editor.cursorStyle": "line",
+  "editor.cursorWidth": 2,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyleInactive": "outline",
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // FONT & TEXT
+  // ═══════════════════════════════════════════════════════════════════════
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Fira Code', monospace",
+  "editor.fontSize": 14,
+  "editor.fontWeight": "400",
+  "editor.lineHeight": 1.6,
+  "editor.letterSpacing": 0.3,
+  "editor.fontLigatures": true,
+  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', monospace",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.lineHeight": 1.4,
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // EDITOR BEHAVIOR
+  // ═══════════════════════════════════════════════════════════════════════
+  "editor.smoothScrolling": true,
+  "editor.scrollBeyondLastLine": false,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 100,
+  "editor.wrappingIndent": "indent",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": true,
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingQuotes": "always",
+  "editor.autoSurround": "languageDefined",
+  "editor.linkedEditing": true,
+  "editor.suggest.insertMode": "replace",
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.snippetSuggestions": "top",
+  "editor.tabCompletion": "on",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // UI & VISUAL
+  // ═══════════════════════════════════════════════════════════════════════
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "selection",
+  "editor.renderLineHighlight": "line",
+  "editor.guides.bracketPairs": true,
+  "editor.guides.indentation": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.matchBrackets": "always",
+  "editor.stickyScroll.enabled": true,
+  "editor.glyphMargin": true,
+  "editor.folding": true,
+  "editor.foldingStrategy": "indentation",
+  "editor.showFoldingControls": "mouseover",
+  "editor.lineNumbers": "on",
+  "editor.rulers": [80, 100],
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#2a2a2a"
+  },
+
+  // Tree/sidebar
+  "workbench.tree.indent": 16,
+  "workbench.tree.renderIndentGuides": "always",
+
+  // Breadcrumbs
+  "breadcrumbs.enabled": true,
+  "breadcrumbs.filePath": "on",
+  "breadcrumbs.symbolPath": "on",
+
+  // Activity bar & sidebar
+  "workbench.activityBar.location": "default",
+  "workbench.sideBar.location": "right",
+  "workbench.statusBar.visible": true,
+
+  // Tabs
+  "workbench.editor.showTabs": "multiple",
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.labelFormat": "short",
+  "workbench.editor.enablePreview": false,
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // FILES & SAVING
+  // ═══════════════════════════════════════════════════════════════════════
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.defaultLanguage": "",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/venv": true,
+    "**/.venv": true,
+    "**/*.pyc": true,
+    "**/target": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/node_modules/**": true,
+    "**/target/**": true
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // SEARCH
+  // ═══════════════════════════════════════════════════════════════════════
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/target": true,
+    "**/dist": true,
+    "**/build": true
+  },
+  "search.useIgnoreFiles": true,
+  "search.smartCase": true,
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TERMINAL
+  // ═══════════════════════════════════════════════════════════════════════
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "fish": {
+      "path": "/usr/bin/fish"
+    },
+    "bash": {
+      "path": "/bin/bash"
+    }
+  },
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.smoothScrolling": true,
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // FORMATTING
+  // ═══════════════════════════════════════════════════════════════════════
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.defaultFormatter": null,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true
+  },
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    "editor.tabSize": 4
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.tabSize": 4
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": false
+    }
+  },
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // GIT
+  // ═══════════════════════════════════════════════════════════════════════
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "always",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": true,
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // QUALITY OF LIFE
+  // ═══════════════════════════════════════════════════════════════════════
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.compactFolders": true,
+  "explorer.sortOrder": "type",
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "update.mode": "manual",
+  "extensions.autoUpdate": false,
+  "extensions.ignoreRecommendations": true,
+  "security.workspace.trust.enabled": false,
+  "window.restoreWindows": "all",
+  "window.newWindowDimensions": "inherit",
+  "window.titleBarStyle": "custom",
+  "zenMode.fullScreen": false,
+  "zenMode.centerLayout": true,
+  "zenMode.hideLineNumbers": false,
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // PERFORMANCE
+  // ═══════════════════════════════════════════════════════════════════════
+  "editor.largeFileOptimizations": true,
+  "editor.maxTokenizationLineLength": 20000,
+  "workbench.list.smoothScrolling": true,
+  "workbench.reduceMotion": "off"
+}

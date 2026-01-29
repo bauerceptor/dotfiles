@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Sets a wallpaper
+
+file="$1"
+
+if [[ -z "$file" ]]; then
+  echo "Usage: $0 <file.jpg>"
+  exit 1
+fi
+
+if [[ -n "$SWAYSOCK" ]]; then
+  # sway
+  target="$HOME/.config/wallpaper.jpg"
+  cp "$file" "$target"
+  swaymsg output '*' background "$target" fill
+elif [[ -f ~/.fehbg ]]; then
+  # feh on x?
+  feh --bg-fill "$file"
+fi

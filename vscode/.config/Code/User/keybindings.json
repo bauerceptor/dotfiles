@@ -1,0 +1,31 @@
+[
+  // Close window with Super+W (consistent with KDE)
+  {
+    "key": "ctrl+q",
+    "command": "workbench.action.closeWindow"
+  },
+  // Better terminal toggle
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  // Quick file switching
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.quickOpen"
+  },
+  // Duplicate line
+  {
+    "key": "ctrl+shift+d",
+    "command": "editor.action.copyLinesDownAction"
+  },
+  // Move line up/down
+  {
+    "key": "alt+up",
+    "command": "editor.action.moveLinesUpAction"
+  },
+  {
+    "key": "alt+down",
+    "command": "editor.action.moveLinesDownAction"
+  }
+]
