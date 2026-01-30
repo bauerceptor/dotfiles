@@ -1,0 +1,24 @@
+[
+  {
+    "label": "lazygit",
+    "command": "lazygit",
+    "use_new_terminal": true,
+    "reveal_target": "center"
+  },
+  {
+    "label": "git pull",
+    "command": "git pull",
+    "hide": "always"
+  },
+  {
+    "label": "git push",
+    "command": "git push",
+    "hide": "always"
+  },
+  {
+    "label": "git status",
+    "command": "git status",
+    "use_new_terminal": true,
+    "reveal_target": "dock"
+  }
+]

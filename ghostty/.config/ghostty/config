@@ -2,7 +2,7 @@
 command = /usr/bin/fish
 
 # Theme
-theme = kanagawa-wave
+theme = kanagawa-dragon
 font-family = "JetBrains Mono Nerd Font"
 font-synthetic-style = false
 font-size = 12
