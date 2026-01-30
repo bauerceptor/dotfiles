@@ -1,5 +1,6 @@
 # =============================================================================
-# Helix Editor Configuration - Comprehensive Setup
+# Helix Editor Configuration
+# ~/.config/helix/config.toml
 # =============================================================================
 
 # =============================================================================
@@ -9,32 +10,19 @@
 theme = "onelight"
 # theme = "catppuccin_latte"
 # theme = "github_light"
-# theme = "github_light_default"
 # theme = "rose_pine_dawn"
 # theme = "gruvbox_light"
-# theme = "gruvbox_light_hard"
-# theme = "gruvbox_light_soft"
 # theme = "solarized_light"
 # theme = "papercolor-light"
 # theme = "fleet_light"
-# theme = "acme"
-# theme = "base16_default_light"
-# theme = "emacs"
 
 # Dark themes
 # theme = "onedark"
 # theme = "catppuccin_mocha"
 # theme = "catppuccin_macchiato"
-# theme = "catppuccin_frappe"
 # theme = "github_dark"
-# theme = "github_dark_default"
-# theme = "github_dark_dimmed"
 # theme = "rose_pine"
-# theme = "rose_pine_moon"
 # theme = "gruvbox"
-# theme = "gruvbox_dark_hard"
-# theme = "gruvbox_dark_soft"
-# theme = "solarized_dark"
 # theme = "tokyonight"
 # theme = "tokyonight_storm"
 # theme = "kanagawa"
@@ -42,26 +30,11 @@ theme = "onelight"
 # theme = "nord"
 # theme = "ayu_dark"
 # theme = "ayu_mirage"
-# theme = "ayu_evolve"
-# theme = "fleet_dark"
-# theme = "base16_default_dark"
-# theme = "monokai_pro"
-# theme = "monokai_pro_octagon"
 # theme = "everforest_dark"
-# theme = "everforest_dark_hard"
-# theme = "nightfox"
-# theme = "carbonfox"
-# theme = "terafox"
-# theme = "modus_vivendi"
-# theme = "zenburn"
-# theme = "material_deep_ocean"
-# theme = "sonokai"
-# theme = "spacebones_light"
-# theme = "doom_acario_dark"
-# theme = "meliora"
+# theme = "monokai_pro"
 
 # =============================================================================
-# EDITOR - CORE
+# EDITOR
 # =============================================================================
 [editor]
 scrolloff = 8
@@ -90,17 +63,11 @@ shell = ["fish", "-c"]
 default-line-ending = "lf"
 insert-final-newline = true
 
-# =============================================================================
-# EDITOR - CURSOR
-# =============================================================================
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
 select = "underline"
 
-# =============================================================================
-# EDITOR - STATUSLINE
-# =============================================================================
 [editor.statusline]
 left = ["mode", "spinner", "file-name", "read-only-indicator", "file-modification-indicator"]
 center = ["diagnostics"]
@@ -110,9 +77,6 @@ mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
-# =============================================================================
-# EDITOR - LSP
-# =============================================================================
 [editor.lsp]
 enable = true
 display-messages = true
@@ -122,39 +86,17 @@ display-signature-help-docs = true
 snippets = true
 goto-reference-include-declaration = true
 
-# =============================================================================
-# EDITOR - INLINE DIAGNOSTICS
-# =============================================================================
-[editor.inline-diagnostics]
-cursor-line = "hint"
-other-lines = "error"
-
-# =============================================================================
-# EDITOR - INDENT GUIDES
-# =============================================================================
 [editor.indent-guides]
 render = true
 character = "▏"
 skip-levels = 0
 
-# =============================================================================
-# EDITOR - GUTTERS
-# =============================================================================
 [editor.gutters]
 layout = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
 
 [editor.gutters.line-numbers]
 min-width = 3
 
-[editor.gutters.diagnostics]
-min-width = 1
-
-[editor.gutters.diff]
-min-width = 1
-
-# =============================================================================
-# EDITOR - SOFT WRAP
-# =============================================================================
 [editor.soft-wrap]
 enable = true
 max-wrap = 25
@@ -162,41 +104,27 @@ max-indent-retain = 0
 wrap-indicator = "↪ "
 wrap-at-text-width = true
 
-# =============================================================================
-# EDITOR - SMART TAB
-# =============================================================================
 [editor.smart-tab]
 enable = true
 supersede-menu = false
 
-# =============================================================================
-# EDITOR - WHITESPACE
-# =============================================================================
 [editor.whitespace.render]
 space = "none"
 tab = "all"
 nbsp = "all"
-nnbsp = "all"
 newline = "none"
 
 [editor.whitespace.characters]
 space = "·"
 nbsp = "⍽"
-nnbsp = "␣"
 tab = "→"
 newline = "⏎"
 tabpad = "·"
 
-# =============================================================================
-# EDITOR - SEARCH
-# =============================================================================
 [editor.search]
 smart-case = true
 wrap-around = true
 
-# =============================================================================
-# EDITOR - FILE PICKER
-# =============================================================================
 [editor.file-picker]
 hidden = false
 follow-symlinks = true
@@ -207,9 +135,6 @@ git-ignore = true
 git-global = true
 git-exclude = true
 
-# =============================================================================
-# EDITOR - AUTO PAIRS
-# =============================================================================
 [editor.auto-pairs]
 '(' = ')'
 '{' = '}'
@@ -238,23 +163,13 @@ git-exclude = true
 # Window Management
 "C-\\" = "vsplit"
 "C-S-\\" = "hsplit"
-"C-w" = { "v" = "vsplit", "s" = "hsplit", "h" = "jump_view_left", "j" = "jump_view_down", "k" = "jump_view_up", "l" = "jump_view_right", "q" = "wclose", "o" = "wonly", "r" = "rotate_view", "H" = "swap_view_left", "J" = "swap_view_down", "K" = "swap_view_up", "L" = "swap_view_right" }
+"C-w" = { "v" = "vsplit", "s" = "hsplit", "h" = "jump_view_left", "j" = "jump_view_down", "k" = "jump_view_up", "l" = "jump_view_right", "q" = "wclose", "o" = "wonly", "r" = "rotate_view" }
 
 # Buffer Navigation
 "A-," = "goto_previous_buffer"
 "A-." = "goto_next_buffer"
-"A-1" = "goto_buffer_1"
-"A-2" = "goto_buffer_2"
-"A-3" = "goto_buffer_3"
-"A-4" = "goto_buffer_4"
-"A-5" = "goto_buffer_5"
-"A-6" = "goto_buffer_6"
-"A-7" = "goto_buffer_7"
-"A-8" = "goto_buffer_8"
-"A-9" = "goto_buffer_9"
 "A-w" = ":buffer-close"
 "A-W" = ":buffer-close-others"
-"A-S-w" = ":buffer-close-all"
 
 # Pickers / Search
 "C-p" = "file_picker"
@@ -262,15 +177,11 @@ git-exclude = true
 "C-b" = "buffer_picker"
 "C-f" = "global_search"
 "C-S-f" = "file_picker_in_current_directory"
-"C-t" = "symbol_picker"
-"C-S-t" = "workspace_symbol_picker"
 "C-/" = "toggle_comments"
 
 # LSP Actions
 "C-." = "code_action"
 "C-r" = "rename_symbol"
-"C-S-d" = "goto_definition"
-"C-S-r" = "goto_reference"
 
 # Scrolling (centered)
 "C-d" = ["half_page_down", "align_view_center"]
@@ -290,8 +201,6 @@ git-exclude = true
 "U" = "redo"
 ">" = "indent"
 "<" = "unindent"
-"C-c" = "normal_mode"
-"esc" = "normal_mode"
 
 # Clipboard (system)
 "C-S-c" = "yank_to_clipboard"
@@ -309,54 +218,31 @@ git-exclude = true
 "C-o" = "jump_backward"
 "C-i" = "jump_forward"
 
-# Multiple Cursors
-"A-d" = "select_next_sibling"
-"A-S-d" = "select_prev_sibling"
-"A-n" = "select_all_children"
-
 # =============================================================================
-# KEYS - NORMAL MODE - SPACE (Leader)
+# KEYS - SPACE (Leader)
 # =============================================================================
 [keys.normal.space]
-# File Operations
 "f" = "file_picker"
 "F" = "file_picker_in_current_directory"
-"r" = "file_picker_in_current_buffer_directory"
 "b" = "buffer_picker"
 "j" = "jumplist_picker"
 "'" = "last_picker"
 "/" = "global_search"
-
-# Symbols
 "s" = "symbol_picker"
 "S" = "workspace_symbol_picker"
-
-# LSP Actions
 "a" = "code_action"
-"n" = "rename_symbol"
+"r" = "rename_symbol"
 "h" = "hover"
 "d" = "goto_definition"
 "D" = "goto_declaration"
 "i" = "goto_implementation"
-"t" = "goto_type_definition"
+"y" = "goto_type_definition"
 "R" = "goto_reference"
-
-# Diagnostics
 "e" = "goto_next_diag"
 "E" = "goto_prev_diag"
-"." = "goto_last_diag"
-"," = "goto_first_diag"
-
-# Formatting
 "p" = ":format"
-"P" = "format_selections"
-
-# Select all
 "v" = "select_all"
 
-# =============================================================================
-# KEYS - NORMAL MODE - SPACE SUBMAPS
-# =============================================================================
 [keys.normal.space.w]
 "v" = "vsplit"
 "s" = "hsplit"
@@ -367,26 +253,12 @@ git-exclude = true
 "q" = "wclose"
 "o" = "wonly"
 "r" = "rotate_view"
-"H" = "swap_view_left"
-"J" = "swap_view_down"
-"K" = "swap_view_up"
-"L" = "swap_view_right"
-"=" = "align_view_center"
-"+" = ":vsplit-new"
-"-" = ":hsplit-new"
 
 [keys.normal.space.t]
 "w" = ":toggle soft-wrap.enable"
 "l" = ":toggle line-number relative absolute"
-"r" = ":toggle rulers [80] [80, 100, 120] []"
 "i" = ":toggle lsp.display-inlay-hints"
-"d" = ":toggle inline-diagnostics.cursor-line disable hint"
 "c" = ":toggle cursorline"
-"C" = ":toggle cursorcolumn"
-"g" = ":toggle gutters.diff.min-width 0 1"
-"b" = ":toggle bufferline always multiple never"
-"p" = ":toggle auto-pairs true false"
-"s" = ":toggle whitespace.render.space all none"
 
 [keys.normal.space.g]
 "g" = ":sh lazygit"
@@ -398,24 +270,20 @@ git-exclude = true
 "q" = ":quit"
 "Q" = ":quit!"
 "a" = ":quit-all"
-"A" = ":quit-all!"
 "w" = ":write-quit"
-"W" = ":write-quit-all"
 
 [keys.normal.space.c]
 "c" = ":buffer-close"
 "o" = ":buffer-close-others"
 "a" = ":buffer-close-all"
-"!" = ":buffer-close!"
 
 [keys.normal.space.y]
 "y" = "yank_to_clipboard"
 "p" = "paste_clipboard_after"
 "P" = "paste_clipboard_before"
-"r" = "replace_selections_with_clipboard"
 
 # =============================================================================
-# KEYS - NORMAL MODE - G (Goto)
+# KEYS - G (Goto)
 # =============================================================================
 [keys.normal.g]
 "d" = "goto_definition"
@@ -439,48 +307,39 @@ git-exclude = true
 "w" = "goto_word"
 
 # =============================================================================
-# KEYS - NORMAL MODE - ] (Next)
+# KEYS - ] (Next)
 # =============================================================================
 [keys.normal."]"]
 "d" = "goto_next_diag"
-"D" = "goto_last_diag"
 "g" = "goto_next_change"
-"G" = "goto_last_change"
 "f" = "goto_next_function"
-"t" = "goto_next_class"
-"a" = "goto_next_parameter"
-"c" = "goto_next_comment"
+"c" = "goto_next_class"
 "p" = "goto_next_paragraph"
 "space" = "add_newline_below"
 
 # =============================================================================
-# KEYS - NORMAL MODE - [ (Previous)
+# KEYS - [ (Previous)
 # =============================================================================
 [keys.normal."["]
 "d" = "goto_prev_diag"
-"D" = "goto_first_diag"
 "g" = "goto_prev_change"
-"G" = "goto_first_change"
 "f" = "goto_prev_function"
-"t" = "goto_prev_class"
-"a" = "goto_prev_parameter"
-"c" = "goto_prev_comment"
+"c" = "goto_prev_class"
 "p" = "goto_prev_paragraph"
 "space" = "add_newline_above"
 
 # =============================================================================
-# KEYS - NORMAL MODE - Z (View)
+# KEYS - Z (View)
 # =============================================================================
 [keys.normal.z]
 "z" = "align_view_center"
 "t" = "align_view_top"
 "b" = "align_view_bottom"
-"m" = "align_view_middle"
 "k" = "scroll_up"
 "j" = "scroll_down"
 
 # =============================================================================
-# KEYS - NORMAL MODE - M (Match/Surround)
+# KEYS - M (Match/Surround)
 # =============================================================================
 [keys.normal.m]
 "m" = "match_brackets"
@@ -499,12 +358,10 @@ git-exclude = true
 "esc" = "normal_mode"
 "j" = { "k" = "normal_mode", "j" = "normal_mode" }
 "C-space" = "completion"
-"C-n" = "completion"
 "C-w" = "delete_word_backward"
 "A-backspace" = "delete_word_backward"
 "C-h" = "delete_char_backward"
 "C-d" = "delete_char_forward"
-"A-d" = "delete_word_forward"
 "C-u" = "kill_to_line_start"
 "C-k" = "kill_to_line_end"
 "C-a" = "goto_line_start"
@@ -514,7 +371,6 @@ git-exclude = true
 "A-b" = "move_prev_word_start"
 "A-f" = "move_next_word_end"
 "C-z" = "undo"
-"C-S-space" = "signature_help"
 
 # =============================================================================
 # KEYS - SELECT MODE
@@ -530,10 +386,9 @@ git-exclude = true
 "C-S-c" = "yank_to_clipboard"
 "C-S-x" = ["yank_to_clipboard", "delete_selection"]
 "s" = "shrink_selection"
-"a" = "select_all_siblings"
 "o" = "expand_selection"
 "i" = "select_textobject_inner"
-"A" = "select_textobject_around"
+"a" = "select_textobject_around"
 "/" = "search"
 "n" = "search_next"
 "N" = "search_prev"
