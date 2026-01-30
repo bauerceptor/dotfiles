@@ -23,8 +23,6 @@
       "g r": "editor::FindAllReferences",
       "g i": "editor::GoToImplementation",
       "K": "editor::Hover",
-      "[ d": "editor::GoToPrevDiagnostic",
-      "] d": "editor::GoToNextDiagnostic",
       "space c a": "editor::ToggleCodeActions",
       "space r n": "editor::Rename"
     }
