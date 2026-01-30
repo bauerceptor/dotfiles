@@ -14,6 +14,16 @@ if test -d /home/linuxbrew/.linuxbrew
     eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 end
 
+# SSH Agent
+if test -z "$SSH_AUTH_SOCK"
+    eval (ssh-agent -c) > /dev/null
+end
+
+# mise activation (add near top, before other tools)
+if type -q mise
+    mise activate fish | source
+end
+
 
 if status is-interactive
     # =========================================================================
