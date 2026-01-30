@@ -1,0 +1,645 @@
+# =============================================================================
+# Helix Editor Configuration - Comprehensive Setup
+# =============================================================================
+
+# =============================================================================
+# THEME
+# =============================================================================
+# Light themes
+theme = "onelight"
+# theme = "catppuccin_latte"
+# theme = "github_light"
+# theme = "github_light_default"
+# theme = "rose_pine_dawn"
+# theme = "gruvbox_light"
+# theme = "gruvbox_light_hard"
+# theme = "gruvbox_light_soft"
+# theme = "solarized_light"
+# theme = "papercolor-light"
+# theme = "fleet_light"
+# theme = "acme"
+# theme = "base16_default_light"
+# theme = "emacs"
+
+# Dark themes
+# theme = "onedark"
+# theme = "catppuccin_mocha"
+# theme = "catppuccin_macchiato"
+# theme = "catppuccin_frappe"
+# theme = "github_dark"
+# theme = "github_dark_default"
+# theme = "github_dark_dimmed"
+# theme = "rose_pine"
+# theme = "rose_pine_moon"
+# theme = "gruvbox"
+# theme = "gruvbox_dark_hard"
+# theme = "gruvbox_dark_soft"
+# theme = "solarized_dark"
+# theme = "tokyonight"
+# theme = "tokyonight_storm"
+# theme = "kanagawa"
+# theme = "dracula"
+# theme = "nord"
+# theme = "ayu_dark"
+# theme = "ayu_mirage"
+# theme = "ayu_evolve"
+# theme = "fleet_dark"
+# theme = "base16_default_dark"
+# theme = "monokai_pro"
+# theme = "monokai_pro_octagon"
+# theme = "everforest_dark"
+# theme = "everforest_dark_hard"
+# theme = "nightfox"
+# theme = "carbonfox"
+# theme = "terafox"
+# theme = "modus_vivendi"
+# theme = "zenburn"
+# theme = "material_deep_ocean"
+# theme = "sonokai"
+# theme = "spacebones_light"
+# theme = "doom_acario_dark"
+# theme = "meliora"
+
+# =============================================================================
+# EDITOR - CORE
+# =============================================================================
+[editor]
+# Scrolling
+scrolloff = 8
+scroll-lines = 3
+
+# Mouse
+mouse = true
+middle-click-paste = true
+
+# Line numbers
+line-number = "relative"
+
+# Auto features
+auto-completion = true
+auto-format = true
+auto-save = true
+auto-info = true
+
+# Timeouts
+idle-timeout = 200
+completion-timeout = 200
+completion-trigger-len = 1
+preview-completion-insert = true
+
+# Display
+true-color = true
+undercurl = true
+color-modes = true
+rulers = [80, 100, 120]
+text-width = 100
+bufferline = "multiple"
+cursorline = true
+cursorcolumn = false
+popup-border = "all"
+
+# Shell
+shell = ["fish", "-c"]
+
+# File handling
+default-line-ending = "lf"
+insert-final-newline = true
+workspace-lsp-roots = []
+
+# =============================================================================
+# EDITOR - CURSOR
+# =============================================================================
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+# =============================================================================
+# EDITOR - STATUSLINE
+# =============================================================================
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "read-only-indicator", "file-modification-indicator"]
+center = ["diagnostics"]
+right = ["selections", "register", "position", "position-percentage", "file-encoding", "file-line-ending", "file-type", "version-control"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+# =============================================================================
+# EDITOR - LSP
+# =============================================================================
+[editor.lsp]
+enable = true
+display-messages = true
+auto-signature-help = true
+display-inlay-hints = true
+display-signature-help-docs = true
+snippets = true
+goto-reference-include-declaration = true
+
+# =============================================================================
+# EDITOR - INLINE DIAGNOSTICS
+# =============================================================================
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "error"
+
+# =============================================================================
+# EDITOR - INDENT GUIDES
+# =============================================================================
+[editor.indent-guides]
+render = true
+character = "▏"
+skip-levels = 0
+
+# =============================================================================
+# EDITOR - GUTTERS
+# =============================================================================
+[editor.gutters]
+layout = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
+
+[editor.gutters.line-numbers]
+min-width = 3
+
+[editor.gutters.diagnostics]
+min-width = 1
+
+[editor.gutters.diff]
+min-width = 1
+
+# =============================================================================
+# EDITOR - SOFT WRAP
+# =============================================================================
+[editor.soft-wrap]
+enable = true
+max-wrap = 25
+max-indent-retain = 0
+wrap-indicator = "↪ "
+wrap-at-text-width = true
+
+# =============================================================================
+# EDITOR - SMART TAB
+# =============================================================================
+[editor.smart-tab]
+enable = true
+supersede-menu = false
+
+# =============================================================================
+# EDITOR - WHITESPACE
+# =============================================================================
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+nbsp = "all"
+nnbsp = "all"
+newline = "none"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+nnbsp = "␣"
+tab = "→"
+newline = "⏎"
+tabpad = "·"
+
+# =============================================================================
+# EDITOR - SEARCH
+# =============================================================================
+[editor.search]
+smart-case = true
+wrap-around = true
+
+# =============================================================================
+# EDITOR - FILE PICKER
+# =============================================================================
+[editor.file-picker]
+hidden = false
+follow-symlinks = true
+deduplicate-links = true
+parents = true
+ignore = true
+git-ignore = true
+git-global = true
+git-exclude = true
+max-depth = none
+
+# =============================================================================
+# EDITOR - AUTO PAIRS
+# =============================================================================
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+"'" = "'"
+"<" = ">"
+
+# =============================================================================
+# KEYS - NORMAL MODE
+# =============================================================================
+[keys.normal]
+# ─────────────────────────────────────────────────────────────────────────────
+# Save / Quit
+# ─────────────────────────────────────────────────────────────────────────────
+"C-s" = ":write"
+"C-S-s" = ":write-all"
+"C-q" = ":quit"
+"C-S-q" = ":quit-all"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Window Navigation
+# ─────────────────────────────────────────────────────────────────────────────
+"C-h" = "jump_view_left"
+"C-j" = "jump_view_down"
+"C-k" = "jump_view_up"
+"C-l" = "jump_view_right"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Window Management
+# ─────────────────────────────────────────────────────────────────────────────
+"C-\\" = "vsplit"
+"C-S-\\" = "hsplit"
+"C-w" = { "v" = "vsplit", "s" = "hsplit", "h" = "jump_view_left", "j" = "jump_view_down", "k" = "jump_view_up", "l" = "jump_view_right", "q" = "wclose", "o" = "wonly", "r" = "rotate_view", "H" = "swap_view_left", "J" = "swap_view_down", "K" = "swap_view_up", "L" = "swap_view_right" }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Buffer Navigation
+# ─────────────────────────────────────────────────────────────────────────────
+"A-," = "goto_previous_buffer"
+"A-." = "goto_next_buffer"
+"A-1" = "goto_buffer_1"
+"A-2" = "goto_buffer_2"
+"A-3" = "goto_buffer_3"
+"A-4" = "goto_buffer_4"
+"A-5" = "goto_buffer_5"
+"A-6" = "goto_buffer_6"
+"A-7" = "goto_buffer_7"
+"A-8" = "goto_buffer_8"
+"A-9" = "goto_buffer_9"
+"A-w" = ":buffer-close"
+"A-W" = ":buffer-close-others"
+"A-S-w" = ":buffer-close-all"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Pickers / Search
+# ─────────────────────────────────────────────────────────────────────────────
+"C-p" = "file_picker"
+"C-S-p" = "command_palette"
+"C-o" = "file_picker_in_current_buffer_directory"
+"C-b" = "buffer_picker"
+"C-f" = "global_search"
+"C-S-f" = "file_picker_in_current_directory"
+"C-t" = "symbol_picker"
+"C-S-t" = "workspace_symbol_picker"
+"C-/" = "toggle_comments"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LSP Actions
+# ─────────────────────────────────────────────────────────────────────────────
+"C-a" = "code_action"
+"C-r" = "rename_symbol"
+"C-S-d" = "goto_definition"
+"C-S-r" = "goto_reference"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Scrolling (centered)
+# ─────────────────────────────────────────────────────────────────────────────
+"C-d" = ["half_page_down", "align_view_center"]
+"C-u" = ["half_page_up", "align_view_center"]
+"C-e" = "scroll_down"
+"C-y" = "scroll_up"
+"pagedown" = ["page_down", "align_view_center"]
+"pageup" = ["page_up", "align_view_center"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Search (centered)
+# ─────────────────────────────────────────────────────────────────────────────
+"n" = ["search_next", "align_view_center"]
+"N" = ["search_prev", "align_view_center"]
+"*" = ["search_selection", "align_view_center"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Editing
+# ─────────────────────────────────────────────────────────────────────────────
+"u" = "undo"
+"U" = "redo"
+">" = "indent"
+"<" = "unindent"
+"C-c" = "normal_mode"
+"esc" = "normal_mode"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Clipboard (system)
+# ─────────────────────────────────────────────────────────────────────────────
+"C-S-c" = "yank_to_clipboard"
+"C-S-v" = "paste_clipboard_after"
+"C-S-x" = ["yank_to_clipboard", "delete_selection"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Selection
+# ─────────────────────────────────────────────────────────────────────────────
+"V" = ["select_mode", "extend_to_line_bounds"]
+"C-a" = "select_all"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Macros
+# ─────────────────────────────────────────────────────────────────────────────
+"Q" = "record_macro"
+"q" = "replay_macro"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Jumplist
+# ─────────────────────────────────────────────────────────────────────────────
+"C-o" = "jump_backward"
+"C-i" = "jump_forward"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Multiple Cursors
+# ─────────────────────────────────────────────────────────────────────────────
+"A-d" = "select_next_sibling"
+"A-S-d" = "select_prev_sibling"
+"A-n" = "select_all_children"
+
+# =============================================================================
+# KEYS - NORMAL MODE - SPACE (Leader)
+# =============================================================================
+[keys.normal.space]
+# ─────────────────────────────────────────────────────────────────────────────
+# File Operations
+# ─────────────────────────────────────────────────────────────────────────────
+"f" = "file_picker"
+"F" = "file_picker_in_current_directory"
+"r" = "file_picker_in_current_buffer_directory"
+"b" = "buffer_picker"
+"j" = "jumplist_picker"
+"'" = "last_picker"
+"/" = "global_search"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Symbols
+# ─────────────────────────────────────────────────────────────────────────────
+"s" = "symbol_picker"
+"S" = "workspace_symbol_picker"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LSP Actions
+# ─────────────────────────────────────────────────────────────────────────────
+"a" = "code_action"
+"n" = "rename_symbol"
+"h" = "hover"
+"d" = "goto_definition"
+"D" = "goto_declaration"
+"i" = "goto_implementation"
+"t" = "goto_type_definition"
+"R" = "goto_reference"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Diagnostics
+# ─────────────────────────────────────────────────────────────────────────────
+"e" = "goto_next_diag"
+"E" = "goto_prev_diag"
+"." = "goto_last_diag"
+"," = "goto_first_diag"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Formatting
+# ─────────────────────────────────────────────────────────────────────────────
+"p" = ":format"
+"P" = "format_selections"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Window Management
+# ─────────────────────────────────────────────────────────────────────────────
+[keys.normal.space.w]
+"v" = "vsplit"
+"s" = "hsplit"
+"h" = "jump_view_left"
+"j" = "jump_view_down"
+"k" = "jump_view_up"
+"l" = "jump_view_right"
+"q" = "wclose"
+"o" = "wonly"
+"r" = "rotate_view"
+"H" = "swap_view_left"
+"J" = "swap_view_down"
+"K" = "swap_view_up"
+"L" = "swap_view_right"
+"=" = "align_view_center"
+"+" = ":vsplit-new"
+"-" = ":hsplit-new"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Toggles
+# ─────────────────────────────────────────────────────────────────────────────
+[keys.normal.space.t]
+"w" = ":toggle soft-wrap.enable"
+"l" = ":toggle line-number relative absolute"
+"r" = ":toggle rulers [80] [80, 100, 120] []"
+"i" = ":toggle lsp.display-inlay-hints"
+"d" = ":toggle inline-diagnostics.cursor-line disable hint"
+"c" = ":toggle cursorline"
+"C" = ":toggle cursorcolumn"
+"g" = ":toggle gutters.diff.min-width 0 1"
+"b" = ":toggle bufferline always multiple never"
+"p" = ":toggle auto-pairs true false"
+"s" = ":toggle whitespace.render.space all none"
+"t" = ":toggle whitespace.render.tab all none"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Git
+# ─────────────────────────────────────────────────────────────────────────────
+[keys.normal.space.g]
+"g" = ":sh lazygit"
+"b" = ":sh git blame -L {line_start},{line_end} {filename}"
+"d" = ":sh git diff {filename}"
+"l" = ":sh git log --oneline -20"
+"s" = ":sh git status"
+"h" = "select_all_siblings"  # Hunks - workaround
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Quit / Save
+# ─────────────────────────────────────────────────────────────────────────────
+[keys.normal.space.q]
+"q" = ":quit"
+"Q" = ":quit!"
+"a" = ":quit-all"
+"A" = ":quit-all!"
+"w" = ":write-quit"
+"W" = ":write-quit-all"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Buffer
+# ─────────────────────────────────────────────────────────────────────────────
+[keys.normal.space.c]
+"c" = ":buffer-close"
+"o" = ":buffer-close-others"
+"a" = ":buffer-close-all"
+"u" = ":buffer-close-orphans"
+"!" = ":buffer-close!"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Yank / Paste
+# ─────────────────────────────────────────────────────────────────────────────
+[keys.normal.space.y]
+"y" = "yank_to_clipboard"
+"p" = "paste_clipboard_after"
+"P" = "paste_clipboard_before"
+"r" = "replace_selections_with_clipboard"
+
+# =============================================================================
+# KEYS - NORMAL MODE - G (Goto)
+# =============================================================================
+[keys.normal.g]
+"d" = "goto_definition"
+"D" = "goto_declaration"
+"y" = "goto_type_definition"
+"i" = "goto_implementation"
+"r" = "goto_reference"
+"h" = "goto_line_start"
+"l" = "goto_line_end"
+"s" = "goto_first_nonwhitespace"
+"g" = "goto_file_start"
+"e" = "goto_file_end"
+"t" = "goto_window_top"
+"c" = "goto_window_center"
+"b" = "goto_window_bottom"
+"a" = "goto_last_accessed_file"
+"m" = "goto_last_modified_file"
+"n" = "goto_next_buffer"
+"p" = "goto_previous_buffer"
+"." = "goto_last_modification"
+"w" = "goto_word"
+
+# =============================================================================
+# KEYS - NORMAL MODE - ] (Next)
+# =============================================================================
+[keys.normal."]"]
+"d" = "goto_next_diag"
+"D" = "goto_last_diag"
+"g" = "goto_next_change"
+"G" = "goto_last_change"
+"f" = "goto_next_function"
+"t" = "goto_next_class"
+"a" = "goto_next_parameter"
+"c" = "goto_next_comment"
+"e" = "goto_next_entry"
+"p" = "goto_next_paragraph"
+"space" = "add_newline_below"
+
+# =============================================================================
+# KEYS - NORMAL MODE - [ (Previous)
+# =============================================================================
+[keys.normal."["]
+"d" = "goto_prev_diag"
+"D" = "goto_first_diag"
+"g" = "goto_prev_change"
+"G" = "goto_first_change"
+"f" = "goto_prev_function"
+"t" = "goto_prev_class"
+"a" = "goto_prev_parameter"
+"c" = "goto_prev_comment"
+"e" = "goto_prev_entry"
+"p" = "goto_prev_paragraph"
+"space" = "add_newline_above"
+
+# =============================================================================
+# KEYS - NORMAL MODE - Z (View)
+# =============================================================================
+[keys.normal.z]
+"z" = "align_view_center"
+"t" = "align_view_top"
+"b" = "align_view_bottom"
+"m" = "align_view_middle"
+"k" = "scroll_up"
+"j" = "scroll_down"
+"C-u" = "page_cursor_half_up"
+"C-d" = "page_cursor_half_down"
+
+# =============================================================================
+# KEYS - NORMAL MODE - MATCH
+# =============================================================================
+[keys.normal.m]
+"m" = "match_brackets"
+"s" = "surround_add"
+"r" = "surround_replace"
+"d" = "surround_delete"
+"a" = "select_textobject_around"
+"i" = "select_textobject_inner"
+
+# =============================================================================
+# KEYS - INSERT MODE
+# =============================================================================
+[keys.insert]
+# Quick save and exit
+"C-s" = [":write", "normal_mode"]
+"C-c" = "normal_mode"
+"esc" = "normal_mode"
+
+# Quick exit with jk
+"j" = { "k" = "normal_mode", "j" = "normal_mode" }
+
+# Completion
+"C-space" = "completion"
+"C-n" = "completion"
+"C-p" = "completion"
+
+# Delete
+"C-w" = "delete_word_backward"
+"A-backspace" = "delete_word_backward"
+"C-backspace" = "delete_word_backward"
+"C-h" = "delete_char_backward"
+"C-d" = "delete_char_forward"
+"A-d" = "delete_word_forward"
+
+# Line editing
+"C-u" = "kill_to_line_start"
+"C-k" = "kill_to_line_end"
+"C-a" = "goto_line_start"
+"C-e" = "goto_line_end"
+
+# Navigation in insert mode
+"C-b" = "move_char_left"
+"C-f" = "move_char_right"
+"A-b" = "move_prev_word_start"
+"A-f" = "move_next_word_end"
+
+# Undo
+"C-z" = "undo"
+
+# Signature help
+"C-S-space" = "signature_help"
+
+# =============================================================================
+# KEYS - SELECT MODE
+# =============================================================================
+[keys.select]
+# Exit
+"C-c" = "normal_mode"
+"esc" = "normal_mode"
+
+# Editing
+"C-/" = "toggle_comments"
+">" = "indent"
+"<" = "unindent"
+"tab" = "indent"
+"S-tab" = "unindent"
+
+# Clipboard
+"C-S-c" = "yank_to_clipboard"
+"C-S-x" = ["yank_to_clipboard", "delete_selection"]
+
+# Selection manipulation
+"s" = "shrink_selection"
+"a" = "select_all_siblings"
+"o" = "expand_selection"
+"i" = "select_textobject_inner"
+"A" = "select_textobject_around"
+
+# Search in selection
+"/" = "search"
+"n" = "search_next"
+"N" = "search_prev"
+
+# Surround
+"S" = "surround_add"

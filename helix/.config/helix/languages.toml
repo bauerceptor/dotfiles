@@ -1,0 +1,270 @@
+# =============================================================================
+# Helix Language Configuration
+# =============================================================================
+
+# =============================================================================
+# LANGUAGE SERVERS
+# =============================================================================
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.vscode-css-language-server]
+command = "vscode-css-language-server"
+args = ["--stdio"]
+
+[language-server.tailwindcss]
+command = "tailwindcss-language-server"
+args = ["--stdio"]
+
+[language-server.emmet-ls]
+command = "emmet-ls"
+args = ["--stdio"]
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.rust-analyzer.config]
+check.command = "clippy"
+cargo.allFeatures = true
+procMacro.enable = true
+inlayHints.bindingModeHints.enable = true
+inlayHints.closureReturnTypeHints.enable = "always"
+inlayHints.lifetimeElisionHints.enable = "always"
+inlayHints.reborrowHints.enable = "always"
+completion.autoimport.enable = true
+
+[language-server.ruby-lsp]
+command = "ruby-lsp"
+
+[language-server.solargraph]
+command = "solargraph"
+args = ["stdio"]
+
+[language-server.gopls]
+command = "gopls"
+
+[language-server.gopls.config]
+gofumpt = true
+staticcheck = true
+
+[language-server.gopls.config.hints]
+assignVariableTypes = true
+compositeLiteralFields = true
+compositeLiteralTypes = true
+constantValues = true
+functionTypeParameters = true
+parameterNames = true
+rangeVariableTypes = true
+
+[language-server.lua-language-server]
+command = "lua-language-server"
+
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+[language-server.json-language-server]
+command = "vscode-json-language-server"
+args = ["--stdio"]
+
+[language-server.docker-langserver]
+command = "docker-langserver"
+args = ["--stdio"]
+
+[language-server.marksman]
+command = "marksman"
+args = ["server"]
+
+[language-server.ltex-ls]
+command = "ltex-ls"
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args = ["start"]
+
+# =============================================================================
+# LANGUAGES
+# =============================================================================
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TypeScript / JavaScript
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server", "tailwindcss", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "tsx"
+language-servers = ["typescript-language-server", "tailwindcss", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "javascript"
+language-servers = ["typescript-language-server", "tailwindcss", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "babel"] }
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = ["typescript-language-server", "tailwindcss", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "babel"] }
+auto-format = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# HTML / CSS
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "html"
+language-servers = ["vscode-html-language-server", "tailwindcss", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "html"] }
+auto-format = true
+
+[[language]]
+name = "css"
+language-servers = ["vscode-css-language-server", "tailwindcss"]
+formatter = { command = "prettier", args = ["--parser", "css"] }
+auto-format = true
+
+[[language]]
+name = "scss"
+language-servers = ["vscode-css-language-server", "tailwindcss"]
+formatter = { command = "prettier", args = ["--parser", "scss"] }
+auto-format = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Python
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "python"
+language-servers = ["pyright", "ruff"]
+formatter = { command = "ruff", args = ["format", "-"] }
+auto-format = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Rust
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "rust"
+language-servers = ["rust-analyzer"]
+auto-format = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ruby
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "ruby"
+language-servers = ["ruby-lsp"]
+formatter = { command = "rubocop", args = ["--stdin", "foo.rb", "-a", "--stderr", "--fail-level", "fatal"] }
+auto-format = true
+
+[[language]]
+name = "erb"
+language-servers = ["ruby-lsp"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Go
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "go"
+language-servers = ["gopls"]
+formatter = { command = "goimports" }
+auto-format = true
+
+[[language]]
+name = "gomod"
+language-servers = ["gopls"]
+auto-format = true
+
+[[language]]
+name = "gowork"
+language-servers = ["gopls"]
+auto-format = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Lua
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "lua"
+language-servers = ["lua-language-server"]
+formatter = { command = "stylua", args = ["-"] }
+auto-format = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# JSON / YAML / TOML
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "json"
+language-servers = ["json-language-server"]
+formatter = { command = "prettier", args = ["--parser", "json"] }
+auto-format = true
+
+[[language]]
+name = "yaml"
+language-servers = ["yaml-language-server"]
+formatter = { command = "prettier", args = ["--parser", "yaml"] }
+auto-format = true
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+auto-format = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Markdown
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "markdown"
+language-servers = ["marksman", "ltex-ls"]
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
+auto-format = true
+soft-wrap.enable = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shell / Bash
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "bash"
+language-servers = ["bash-language-server"]
+formatter = { command = "shfmt", args = ["-i", "2", "-"] }
+auto-format = true
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Docker
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "dockerfile"
+language-servers = ["docker-langserver"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Git
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "git-commit"
+language-servers = ["ltex-ls"]
+soft-wrap.enable = true
+rulers = [50, 72]
+
+[[language]]
+name = "git-rebase"
+auto-format = false
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SQL
+# ─────────────────────────────────────────────────────────────────────────────
+[[language]]
+name = "sql"
+formatter = { command = "sql-formatter", args = ["-l", "postgresql"] }
+auto-format = true
