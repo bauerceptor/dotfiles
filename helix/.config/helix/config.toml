@@ -236,7 +236,6 @@ git-exclude = true
 "d" = "goto_definition"
 "D" = "goto_declaration"
 "i" = "goto_implementation"
-"y" = "goto_type_definition"
 "R" = "goto_reference"
 "e" = "goto_next_diag"
 "E" = "goto_prev_diag"
