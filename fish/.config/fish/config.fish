@@ -9,6 +9,12 @@ if not functions -q fisher
     fisher update
 end
 
+# Homebrew
+if test -d /home/linuxbrew/.linuxbrew
+    eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+end
+
+
 if status is-interactive
     # =========================================================================
     # Tool Initializations (order matters!)
@@ -132,3 +138,10 @@ if status is-interactive
     # =========================================================================
     set -g fish_greeting
 end
+
+# pnpm
+set -gx PNPM_HOME "/home/ember/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
