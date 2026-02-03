@@ -148,7 +148,7 @@
   // ═══════════════════════════════════════════════════════════════════════════
   "terminal": {
     "shell": {
-      "program": "/usr/bin/fish"
+      "program": "fish"
     },
     "font_family": "JetBrainsMono Nerd Font",
     "font_size": 14,

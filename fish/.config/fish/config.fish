@@ -9,9 +9,13 @@ if not functions -q fisher
     fisher update
 end
 
-# Homebrew
-if test -d /home/linuxbrew/.linuxbrew
+# Homebrew (platform-agnostic)
+if command -v brew &>/dev/null
+    eval (brew shellenv)
+else if test -d /home/linuxbrew/.linuxbrew
     eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+else if test -d /opt/homebrew
+    eval (/opt/homebrew/bin/brew shellenv)
 end
 
 # SSH Agent
@@ -149,8 +153,8 @@ if status is-interactive
     set -g fish_greeting
 end
 
-# pnpm
-set -gx PNPM_HOME "/home/ember/.local/share/pnpm"
+# pnpm (platform-agnostic)
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end

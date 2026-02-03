@@ -1,1 +1,24 @@
+# Fish variables (user-specific)
 fish/.config/fish/fish_variables
+
+# LazyVim generated files
+lazyvim/.config/nvim/lazy-lock.json
+lazyvim/.config/nvim/.neoconf.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor temp files
+*.swp
+*.swo
+*~
+.vscode/
+
+# Secrets
+.env
+*.key
+*.pem
+
+# Local overrides
+*.local

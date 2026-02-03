@@ -136,10 +136,10 @@
   "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.profiles.linux": {
     "fish": {
-      "path": "/usr/bin/fish"
+      "path": "fish"
     },
     "bash": {
-      "path": "/bin/bash"
+      "path": "bash"
     }
   },
   "terminal.integrated.scrollback": 10000,
@@ -243,5 +243,6 @@
     "plaintext": false,
     "markdown": false,
     "scminput": false
-  }
+  },
+  "workbench.panel.showLabels": false
 }

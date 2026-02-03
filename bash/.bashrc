@@ -72,8 +72,14 @@ export BAT_THEME="TwoDark"
 # TOOL INITIALIZATIONS
 # ═══════════════════════════════════════════════════════════════════════════
 
-# Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)" 2>/dev/null
+# Homebrew (platform-agnostic)
+if command -v brew &>/dev/null; then
+    eval "$(brew shellenv bash)"
+elif [ -d /home/linuxbrew/.linuxbrew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+elif [ -d /opt/homebrew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv bash)"
+fi
 
 # Cargo/Rust
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
@@ -99,15 +105,21 @@ command -v zoxide &>/dev/null && eval "$(zoxide init bash)"
 # Direnv (per-directory env)
 command -v direnv &>/dev/null && eval "$(direnv hook bash)"
 
-# fzf
-[[ -f /usr/share/fzf/shell/key-bindings.bash ]] && source /usr/share/fzf/shell/key-bindings.bash
+# fzf (platform-agnostic)
+for fzf_path in /usr/share/fzf/shell /usr/local/opt/fzf/shell ~/.fzf/shell; do
+    [[ -f "$fzf_path/key-bindings.bash" ]] && source "$fzf_path/key-bindings.bash" && break
+done
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 # envman
 [[ -s "$HOME/.config/envman/load.sh" ]] && source "$HOME/.config/envman/load.sh"
 
-# Bash completions
-[[ -f /usr/share/bash-completion/bash_completion ]] && source /usr/share/bash-completion/bash_completion
+# Bash completions (platform-agnostic)
+for bc_path in /usr/share/bash-completion/bash_completion \
+                /usr/local/share/bash-completion/bash_completion \
+                /opt/homebrew/etc/profile.d/bash_completion.sh; do
+    [[ -f "$bc_path" ]] && source "$bc_path" && break
+done
 
 # Source additional configs
 if [ -d ~/.bashrc.d ]; then
@@ -519,16 +531,10 @@ if command -v distrobox &>/dev/null; then
 fi
 
 # ═══════════════════════════════════════════════════════════════════════════
-# SYSTEM ALIASES (Fedora/DNF)
+# SYSTEM ALIASES (Distro-Agnostic)
 # ═══════════════════════════════════════════════════════════════════════════
 
-alias dnfi='sudo dnf install'
-alias dnfs='dnf search'
-alias dnfu='sudo dnf upgrade'
-alias dnfr='sudo dnf remove'
-alias dnfl='dnf list installed'
-alias dnfp='dnf provides'
-alias dnfw='dnf info'
+# Package manager aliases are loaded from ~/.bashrc.d/package-manager.sh
 
 # Flatpak
 alias fp='flatpak'

@@ -1,5 +1,5 @@
-# Shell
-command = /usr/bin/fish
+# Shell (use from PATH)
+command = fish
 
 # Theme
 theme = kanagawa-dragon

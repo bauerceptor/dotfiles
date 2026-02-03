@@ -1,0 +1,35 @@
+gui:
+  theme:
+    activeBorderColor:
+      - magenta
+      - bold
+    inactiveBorderColor:
+      - white
+    selectedLineBgColor:
+      - reverse
+  commitLength:
+    show: true
+  mouseEvents: true
+  skipUnstageLineWarning: false
+  skipStashWarning: false
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never
+  commit:
+    signOff: false
+  merging:
+    manualCommit: false
+  log:
+    order: topo-order
+  skipHookPrefix: WIP
+
+refresher:
+  refreshInterval: 10
+  fetchInterval: 60
+
+update:
+  method: never
+
+notARepository: 'quit'

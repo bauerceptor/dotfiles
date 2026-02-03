@@ -509,13 +509,31 @@ if status is-interactive
     # System Management (Fedora/DNF)
     # =========================================================================
     
+    # Package manager abbreviations (distro-agnostic)
     if type -q dnf
-        abbr -a dnfi 'sudo dnf install'
-        abbr -a dnfs 'dnf search'
-        abbr -a dnfu 'sudo dnf upgrade'
-        abbr -a dnfr 'sudo dnf remove'
-        abbr -a dnfl 'dnf list installed'
-        abbr -a dnfp 'dnf provides'
+        # Fedora/RHEL
+        abbr -a pkgi 'sudo dnf install'
+        abbr -a pkgs 'dnf search'
+        abbr -a pkgu 'sudo dnf upgrade'
+        abbr -a pkgr 'sudo dnf remove'
+        abbr -a pkgl 'dnf list installed'
+        abbr -a pkginfo 'dnf info'
+    else if type -q apt
+        # Debian/Ubuntu
+        abbr -a pkgi 'sudo apt install'
+        abbr -a pkgs 'apt search'
+        abbr -a pkgu 'sudo apt upgrade'
+        abbr -a pkgr 'sudo apt remove'
+        abbr -a pkgl 'apt list --installed'
+        abbr -a pkginfo 'apt show'
+    else if type -q pacman
+        # Arch Linux
+        abbr -a pkgi 'sudo pacman -S'
+        abbr -a pkgs 'pacman -Ss'
+        abbr -a pkgu 'sudo pacman -Syu'
+        abbr -a pkgr 'sudo pacman -R'
+        abbr -a pkgl 'pacman -Q'
+        abbr -a pkginfo 'pacman -Si'
     end
     
     if type -q flatpak
