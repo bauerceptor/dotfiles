@@ -1,0 +1,39 @@
+[meta]
+name = "Accessibility Plus"
+variant = "dark"
+description = "WCAG AAA compliant - maximum contrast for visibility in any condition"
+purpose = "Bright environments, vision accessibility, presentations, and screen sharing. Exceeds WCAG AAA standards."
+best_for = ["Bright offices", "Screen sharing", "Presentations", "Vision accessibility", "Outdoor coding"]
+
+[colors.base]
+background = "#000000"
+foreground = "#ffffff"
+cursor = "#00ff00"
+selection_bg = "#ffffff"
+selection_fg = "#000000"
+
+[colors.ansi]
+black = "#000000"
+red = "#ff3366"
+green = "#00ff00"
+yellow = "#ffff00"
+blue = "#3399ff"
+magenta = "#ff33ff"
+cyan = "#00ffff"
+white = "#ffffff"
+
+[colors.bright]
+black = "#666666"
+red = "#ff6699"
+green = "#66ff66"
+yellow = "#ffff66"
+blue = "#66bbff"
+magenta = "#ff66ff"
+cyan = "#66ffff"
+white = "#ffffff"
+
+[colors.semantic]
+error = "#ff3366"
+warning = "#ffff00"
+success = "#00ff00"
+info = "#3399ff"

@@ -1,0 +1,39 @@
+[meta]
+name = "Synthwave Energy"
+variant = "dark"
+description = "Retro-futuristic aesthetics for creative energy - neon colors inspire innovative thinking"
+purpose = "Creative coding, experimental projects, hackathons. Energizing neon palette for innovative work."
+best_for = ["Creative projects", "Hackathons", "Experimental code", "Side projects", "Innovation sessions"]
+
+[colors.base]
+background = "#1a1625"
+foreground = "#f0f0f0"
+cursor = "#ff00ff"
+selection_bg = "#4d2d52"
+selection_fg = "#ffffff"
+
+[colors.ansi]
+black = "#241b2f"
+red = "#ff2a6d"
+green = "#05d9e8"
+yellow = "#ffe64d"
+blue = "#7b2cbf"
+magenta = "#ff006e"
+cyan = "#01cdfe"
+white = "#d6d6d6"
+
+[colors.bright]
+black = "#463465"
+red = "#ff4d7d"
+green = "#05f4fd"
+yellow = "#fff685"
+blue = "#9d50e0"
+magenta = "#ff3382"
+cyan = "#0ef9ff"
+white = "#ffffff"
+
+[colors.semantic]
+error = "#ff2a6d"
+warning = "#ffe64d"
+success = "#05d9e8"
+info = "#7b2cbf"

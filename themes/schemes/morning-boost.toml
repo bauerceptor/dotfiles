@@ -1,0 +1,39 @@
+[meta]
+name = "Morning Boost"
+variant = "light"
+description = "Energizing bright colors for morning productivity - high energy palette to kickstart your day"
+purpose = "Morning work (6AM-12PM). Vibrant colors promote alertness and energy for productive starts."
+best_for = ["Morning coding", "Planning sessions", "Creative work", "High energy tasks"]
+
+[colors.base]
+background = "#fef9f3"
+foreground = "#2e2e2e"
+cursor = "#ff6b35"
+selection_bg = "#ffdb99"
+selection_fg = "#2e2e2e"
+
+[colors.ansi]
+black = "#2e2e2e"
+red = "#ff4757"
+green = "#2ed573"
+yellow = "#ffa502"
+blue = "#1e90ff"
+magenta = "#ff6348"
+cyan = "#00d2d3"
+white = "#e8e8e8"
+
+[colors.bright]
+black = "#5a5a5a"
+red = "#ff6b7a"
+green = "#7bed9f"
+yellow = "#ffc048"
+blue = "#70a1ff"
+magenta = "#ff7979"
+cyan = "#48dbfb"
+white = "#ffffff"
+
+[colors.semantic]
+error = "#ff4757"
+warning = "#ffa502"
+success = "#2ed573"
+info = "#1e90ff"

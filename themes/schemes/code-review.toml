@@ -1,0 +1,39 @@
+[meta]
+name = "Code Review"
+variant = "dark"
+description = "Optimized for git diffs and code review - maximizes change visibility with high contrast diff colors"
+purpose = "Pull request reviews, git diffs, and change detection. Enhanced green/red contrast for modifications."
+best_for = ["Git diff viewing", "Code reviews", "Merge conflict resolution", "Change detection"]
+
+[colors.base]
+background = "#1a1d23"
+foreground = "#d4d4d4"
+cursor = "#ffa500"
+selection_bg = "#3a3f4b"
+selection_fg = "#ffffff"
+
+[colors.ansi]
+black = "#2d3139"
+red = "#ff4444"
+green = "#00cc66"
+yellow = "#ffaa00"
+blue = "#4d9fff"
+magenta = "#cc88ff"
+cyan = "#00cccc"
+white = "#d4d4d4"
+
+[colors.bright]
+black = "#5a5f6b"
+red = "#ff6666"
+green = "#00ff88"
+yellow = "#ffcc44"
+blue = "#66b3ff"
+magenta = "#ddaaff"
+cyan = "#44dddd"
+white = "#ffffff"
+
+[colors.semantic]
+error = "#ff4444"
+warning = "#ffaa00"
+success = "#00cc66"
+info = "#4d9fff"

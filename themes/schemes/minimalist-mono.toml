@@ -1,0 +1,39 @@
+[meta]
+name = "Minimalist Mono"
+variant = "dark"
+description = "Pure monochrome for absolute zero distractions - only shades of gray, nothing else"
+purpose = "Writing documentation, deep thought, meditation on code. Pure grayscale eliminates all visual noise."
+best_for = ["Documentation writing", "Reading code", "Minimal distraction", "Philosophy/meditation on code"]
+
+[colors.base]
+background = "#1a1a1a"
+foreground = "#d0d0d0"
+cursor = "#ffffff"
+selection_bg = "#404040"
+selection_fg = "#ffffff"
+
+[colors.ansi]
+black = "#2a2a2a"
+red = "#8a8a8a"
+green = "#9a9a9a"
+yellow = "#aaaaaa"
+blue = "#7a7a7a"
+magenta = "#8a8a8a"
+cyan = "#9a9a9a"
+white = "#d0d0d0"
+
+[colors.bright]
+black = "#4a4a4a"
+red = "#ababab"
+green = "#bababa"
+yellow = "#cacaca"
+blue = "#9a9a9a"
+magenta = "#ababab"
+cyan = "#bababa"
+white = "#ffffff"
+
+[colors.semantic]
+error = "#eeeeee"
+warning = "#cccccc"
+success = "#aaaaaa"
+info = "#999999"

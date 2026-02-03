@@ -1,0 +1,39 @@
+[meta]
+name = "Debugging Mode"
+variant = "dark"
+description = "High contrast for error spotting - optimized for identifying bugs, stack traces, and anomalies"
+purpose = "Bug hunting, stack trace analysis, error investigation. Enhanced red/yellow for error visibility."
+best_for = ["Debugging", "Error analysis", "Stack trace reading", "Test failure investigation"]
+
+[colors.base]
+background = "#15161a"
+foreground = "#e0e0e0"
+cursor = "#ff9500"
+selection_bg = "#3a3d4a"
+selection_fg = "#ffffff"
+
+[colors.ansi]
+black = "#20232a"
+red = "#ff4040"
+green = "#50c878"
+yellow = "#ffcc00"
+blue = "#5599ff"
+magenta = "#dd88ff"
+cyan = "#40e0d0"
+white = "#e0e0e0"
+
+[colors.bright]
+black = "#505566"
+red = "#ff6060"
+green = "#70e898"
+yellow = "#ffdd44"
+blue = "#77aaff"
+magenta = "#ee99ff"
+cyan = "#60f0e0"
+white = "#ffffff"
+
+[colors.semantic]
+error = "#ff4040"
+warning = "#ffcc00"
+success = "#50c878"
+info = "#5599ff"

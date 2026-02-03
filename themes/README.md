@@ -1,313 +1,294 @@
 # Centralized Theme System
 
-Flexible theme management for your dotfiles. Apply different themes to different tools independently.
+Purpose-driven themes for intentional workflows. Each theme is designed for a specific activity or time of day.
 
-## 🎨 Features
+## 🎯 Philosophy
 
-- **Per-Tool Themes** - Each tool can have its own theme
-- **Central Palette** - Define colors once, generate for multiple tools
-- **Easy Switching** - One command to change themes
-- **Preserved Configs** - Your current themes stay untouched until you apply a new one
-- **Automated Conversion** - Python scripts generate tool-specific configs
+These aren't just color schemes - they're **workflow tools**. Each theme is crafted with a specific purpose, optimizing your environment for different types of work.
 
-## 📂 Structure
+## 🎨 Available Themes
 
-```
-themes/
-├── schemes/          # Theme palette definitions (TOML)
-│   ├── sakura-dark.toml
-│   ├── sakura-light.toml
-│   ├── nord.toml
-│   └── gruvbox-dark.toml
-├── converters/       # Python scripts to convert palettes
-│   ├── to_alacritty.py
-│   └── to_ghostty.py
-├── generated/        # Auto-generated theme configs (don't edit)
-└── README.md         # This file
-```
+### 🧠 Deep Focus
+**When:** Complex problems requiring intense concentration
+**Purpose:** Monochromatic design eliminates color distractions
+**Best For:**
+- Deep work sessions (2-4 hours)
+- Complex debugging
+- Architecture planning
+- Algorithm design
 
-## 🚀 Quick Start
+**Why It Works:** Reduces cognitive load by removing color variety. Your brain processes fewer visual stimuli, leaving more capacity for the problem at hand.
 
-### List Available Themes
+---
 
+### 👁️ Code Review
+**When:** Reviewing pull requests and diffs
+**Purpose:** Maximizes change visibility with high-contrast diff colors
+**Best For:**
+- Git diff viewing
+- Pull request reviews
+- Merge conflict resolution
+- Change detection
+
+**Why It Works:** Enhanced green/red contrast makes additions and deletions immediately obvious. Yellow for warnings stands out clearly.
+
+---
+
+### 🌙 Night Owl
+**When:** Late night coding (8PM-2AM)
+**Purpose:** Low blue light emission preserves circadian rhythm
+**Best For:**
+- Late night sessions
+- Reducing eye strain
+- Preserving sleep cycle
+- Extended evening work
+
+**Why It Works:** Warm amber tones reduce blue light exposure, minimizing melatonin suppression. You'll sleep better after late coding sessions.
+
+---
+
+### ☀️ Morning Boost
+**When:** Morning productivity (6AM-12PM)
+**Purpose:** Energizing bright colors kickstart your day
+**Best For:**
+- Morning coding
+- Planning sessions
+- Creative work
+- High-energy tasks
+
+**Why It Works:** Vibrant colors promote alertness. Light background leverages natural morning light for energy.
+
+---
+
+### ♿ Accessibility Plus
+**When:** Bright environments or vision needs
+**Purpose:** WCAG AAA compliant maximum contrast
+**Best For:**
+- Bright offices
+- Screen sharing
+- Presentations
+- Vision accessibility
+- Outdoor coding
+
+**Why It Works:** Exceeds WCAG AAA standards for contrast. Readable in any lighting condition.
+
+---
+
+### 🖥️ Terminal Native
+**When:** CLI-heavy workflows and DevOps
+**Purpose:** Optimized for shell output and log parsing
+**Best For:**
+- DevOps work
+- System administration
+- Log analysis
+- SSH sessions
+- Server management
+
+**Why It Works:** Enhanced colors for common terminal outputs (errors, success, warnings). Makes log parsing easier.
+
+---
+
+### 🎨 Minimalist Mono
+**When:** Writing documentation or reading code
+**Purpose:** Pure grayscale for zero visual noise
+**Best For:**
+- Documentation writing
+- Reading/studying code
+- Absolute focus
+- Meditative coding
+
+**Why It Works:** Complete absence of color eliminates all visual distractions. Forces focus on structure and content.
+
+---
+
+### 🌊 Zen Mode
+**When:** Refactoring and thoughtful design
+**Purpose:** Calming earth tones reduce stress
+**Best For:**
+- Refactoring
+- Architecture design
+- Thoughtful coding
+- Stress reduction
+- Long sessions
+
+**Why It Works:** Inspired by Japanese tea room aesthetics. Muted earth tones promote calm, sustained focus without fatigue.
+
+---
+
+### ⚡ Synthwave Energy
+**When:** Creative projects and experiments
+**Purpose:** Retro-futuristic aesthetics inspire innovation
+**Best For:**
+- Creative coding
+- Hackathons
+- Experimental projects
+- Side projects
+- Innovation sessions
+
+**Why It Works:** Neon colors create an energizing, playful atmosphere. Encourages creative thinking and experimentation.
+
+---
+
+### 🐛 Debugging Mode
+**When:** Hunting bugs and analyzing errors
+**Purpose:** High contrast for error spotting
+**Best For:**
+- Active debugging
+- Stack trace analysis
+- Error investigation
+- Test failure diagnosis
+
+**Why It Works:** Enhanced red/yellow for errors and warnings. Makes problems jump out visually for faster identification.
+
+---
+
+### 🌸 Sakura (Dark/Light)
+**When:** General purpose with aesthetic preference
+**Purpose:** Your current beloved theme
+**Best For:**
+- Default daily use
+- Aesthetic enjoyment
+- General coding
+
+---
+
+## 🚀 Usage
+
+### List All Themes
 ```bash
 cd ~/.dotfiles
 ./scripts/switch-theme.sh list
 ```
 
-### Show Current Themes
-
+### Apply By Purpose
 ```bash
-./scripts/switch-theme.sh show
+# Starting deep work session
+./scripts/switch-theme.sh deep-focus alacritty
+
+# About to review PRs
+./scripts/switch-theme.sh code-review ghostty
+
+# Late night coding
+./scripts/switch-theme.sh night-owl all
+
+# Morning productivity
+./scripts/switch-theme.sh morning-boost all
+
+# Debugging a critical issue
+./scripts/switch-theme.sh debugging-mode alacritty
 ```
 
-### Apply Theme to Specific Tool
-
+### Different Themes Per Tool
 ```bash
-# Apply to Alacritty only
-./scripts/switch-theme.sh sakura-dark alacritty
-
-# Apply to Ghostty only
-./scripts/switch-theme.sh nord ghostty
-
-# Apply to all tools
-./scripts/switch-theme.sh gruvbox-dark all
+# Terminal for deep focus, editor for code review
+./scripts/switch-theme.sh deep-focus alacritty
+./scripts/switch-theme.sh code-review ghostty
 ```
 
-## 📖 Usage Examples
+## 💡 Workflow Examples
 
-### Keep Different Themes for Each Tool
-
+### Morning Developer
 ```bash
-# Set Alacritty to Sakura Dark
-./scripts/switch-theme.sh sakura-dark alacritty
+# 7 AM - Start with energy
+./scripts/switch-theme.sh morning-boost all
 
-# Set Ghostty to Nord
-./scripts/switch-theme.sh nord ghostty
+# 10 AM - Deep focus on complex feature
+./scripts/switch-theme.sh deep-focus all
 
-# Now Alacritty uses Sakura and Ghostty uses Nord!
+# 2 PM - PR review time
+./scripts/switch-theme.sh code-review all
+
+# 4 PM - Debugging production issue
+./scripts/switch-theme.sh debugging-mode all
+
+# 9 PM - Late evening refactor
+./scripts/switch-theme.sh night-owl all
 ```
 
-### Switch One Tool's Theme
-
+### DevOps Engineer
 ```bash
-# Change only Alacritty
-./scripts/switch-theme.sh gruvbox-dark alacritty
+# Terminal for system work
+./scripts/switch-theme.sh terminal-native alacritty
 
-# Ghostty keeps its previous theme (Nord)
+# Editor for code changes
+./scripts/switch-theme.sh code-review ghostty
 ```
 
-### Apply Same Theme to All
-
+### Open Source Maintainer
 ```bash
-# Set all tools to the same theme
-./scripts/switch-theme.sh nord all
+# Review PRs
+./scripts/switch-theme.sh code-review all
+
+# Deep architectural work
+./scripts/switch-theme.sh zen-mode all
+
+# Write documentation
+./scripts/switch-theme.sh minimalist-mono all
 ```
 
-## 🎨 Available Themes
+## 🎯 Choosing The Right Theme
 
-### Custom Themes
+**Ask yourself:**
+1. **What time is it?** → Morning Boost / Night Owl
+2. **What am I doing?** → Match the purpose
+3. **How long will I work?** → Zen Mode / Deep Focus for long sessions
+4. **What's my energy level?** → Synthwave Energy / Minimalist Mono
+5. **Where am I?** → Accessibility Plus for bright environments
 
-**Sakura Dark**
-- Soft cherry blossom pinks, gentle and dreamy
-- **Variant:** Dark
-- **Colors:** Pink accents, dark purple background
+## 🛠️ Creating Your Own Purpose-Driven Theme
 
-**Sakura Light**
-- Daytime cherry blossom, soft and airy
-- **Variant:** Light
-- **Colors:** Soft pinks, light background
+Think about your workflow:
+1. **Identify a specific activity** (not just "coding")
+2. **Define the goal** (focus? energy? calm?)
+3. **Choose colors intentionally** based on psychology
+4. **Test in real scenarios**
+5. **Iterate based on effectiveness**
 
-### Popular Community Themes
+### Color Psychology Guide
+- **Blue:** Calm, trust, productivity
+- **Red:** Urgency, errors, action
+- **Green:** Success, calm, nature
+- **Yellow:** Warning, energy, attention
+- **Gray:** Neutral, minimal distraction
+- **Warm tones:** Comfort, reduce blue light
+- **Cool tones:** Energy, alertness
 
-**Catppuccin Mocha** 🌸
-- Soothing pastel theme - Darkest variant
-- **Variant:** Dark
-- **Preview:** https://catppuccin.com/palette
-- **GitHub:** https://github.com/catppuccin/catppuccin
+## 📝 Tips
 
-**Catppuccin Macchiato** ☕
-- Soothing pastel theme - Medium dark variant
-- **Variant:** Dark
-- **Preview:** https://catppuccin.com/palette
+### 1. Match Theme to Task
+Don't use Synthwave Energy for debugging. Don't use Minimalist Mono for creative work. Each theme has a purpose.
 
-**Catppuccin Latte** ☀️
-- Soothing pastel theme - Light variant
-- **Variant:** Light
-- **Preview:** https://catppuccin.com/palette
-
-**Dracula** 🧛
-- A dark theme with vibrant colors
-- **Variant:** Dark
-- **Preview:** https://draculatheme.com/
-- **GitHub:** https://draculatheme.com/contribute
-
-**Tokyo Night** 🏙️
-- Clean dark theme inspired by Tokyo city lights
-- **Variant:** Dark
-- **Preview:** https://github.com/enkia/tokyo-night-vscode-theme#screenshots
-
-**Tokyo Night Storm** ⛈️
-- Tokyo Night theme - Storm variant (lighter)
-- **Variant:** Dark
-- **Preview:** https://github.com/enkia/tokyo-night-vscode-theme#screenshots
-
-**One Dark** ⚫
-- Atom's iconic One Dark theme
-- **Variant:** Dark
-- **Preview:** https://github.com/atom/atom/tree/master/packages/one-dark-syntax
-
-**Solarized Dark** 🌓
-- Precision colors for machines and people
-- **Variant:** Dark
-- **Preview:** https://ethanschoonover.com/solarized/
-- **GitHub:** https://github.com/altercation/solarized
-
-**Solarized Light** ☀️
-- Precision colors - Light variant
-- **Variant:** Light
-- **Preview:** https://ethanschoonover.com/solarized/
-
-**Monokai Pro** 💼
-- Professional theme with warm colors
-- **Variant:** Dark
-- **Preview:** https://monokai.pro/
-
-**Nord** ❄️
-- Arctic, north-bluish color palette
-- **Variant:** Dark
-- **Preview:** https://www.nordtheme.com/
-
-**Gruvbox Dark** 🟤
-- Retro groove color scheme
-- **Variant:** Dark
-- **Preview:** https://github.com/morhetz/gruvbox
-
-## 🛠️ Creating Your Own Theme
-
-### 1. Create a Palette File
-
-Create `themes/schemes/mytheme.toml`:
-
-```toml
-[meta]
-name = "My Theme"
-variant = "dark"  # or "light"
-description = "My custom theme description"
-
-[colors.base]
-background = "#1a1a1a"
-foreground = "#e0e0e0"
-cursor = "#00ff00"
-selection_bg = "#444444"
-selection_fg = "#ffffff"
-
-[colors.ansi]
-black = "#1a1a1a"
-red = "#ff5555"
-green = "#50fa7b"
-yellow = "#f1fa8c"
-blue = "#bd93f9"
-magenta = "#ff79c6"
-cyan = "#8be9fd"
-white = "#f8f8f2"
-
-[colors.bright]
-black = "#6272a4"
-red = "#ff6e6e"
-green = "#69ff94"
-yellow = "#ffffa5"
-blue = "#d6acff"
-magenta = "#ff92df"
-cyan = "#a4ffff"
-white = "#ffffff"
-
-[colors.semantic]
-error = "#ff5555"
-warning = "#f1fa8c"
-success = "#50fa7b"
-info = "#bd93f9"
-```
-
-### 2. Apply Your Theme
-
+### 2. Time-Based Switching
 ```bash
-./scripts/switch-theme.sh mytheme alacritty
+# Add to your shell config
+alias theme-morning='~/.dotfiles/scripts/switch-theme.sh morning-boost all'
+alias theme-night='~/.dotfiles/scripts/switch-theme.sh night-owl all'
+alias theme-focus='~/.dotfiles/scripts/switch-theme.sh deep-focus all'
 ```
 
-## 🔧 How It Works
-
-1. **Central Palette** - Colors defined in `schemes/*.toml`
-2. **Converters** - Python scripts read palette and generate tool configs
-3. **Generated Configs** - Tool-specific configs created in `generated/`
-4. **Symlinks** - Configs are symlinked to the right locations:
-   - `~/.config/alacritty/colors.toml` → `generated/alacritty-mytheme.toml`
-   - `~/.config/ghostty/theme-active` → `generated/ghostty-mytheme.toml`
-
-## 📝 Important Notes
-
-### Your Current Themes Are Safe
-
-- **Alacritty**: Your current inline theme in `alacritty.toml` is untouched
-- **Ghostty**: Your `kanagawa-dragon` theme is preserved
-- **Opt-in System**: Themes only change when you explicitly apply them
-
-### Using Central Themes
-
-To use the central theme system, your tool configs need to import the generated files:
-
-**Alacritty** (`alacritty.toml`):
-```toml
-# Add this at the end of your config
-import = ["~/.config/alacritty/colors.toml"]
-```
-
-**Ghostty** (`config`):
-```
-# Change the theme line to:
-theme = theme-active
-```
-
-### Reverting to Original Themes
-
-To stop using the central theme system:
-
-**Alacritty:**
+### 3. Activity Aliases
 ```bash
-rm ~/.config/alacritty/colors.toml
-# Remove the import line from alacritty.toml
+alias start-review='~/.dotfiles/scripts/switch-theme.sh code-review all'
+alias start-debug='~/.dotfiles/scripts/switch-theme.sh debugging-mode all'
+alias start-zen='~/.dotfiles/scripts/switch-theme.sh zen-mode all'
 ```
 
-**Ghostty:**
-```bash
-rm ~/.config/ghostty/theme-active
-# Change theme line back to: theme = kanagawa-dragon
-```
+### 4. Experiment
+Try each theme for its intended purpose. Notice how it affects your work. Adjust your workflow accordingly.
 
-## 🆘 Troubleshooting
+## 🧪 Scientific Backing
 
-### Theme Not Applying
-
-1. Check if the symlink exists:
-   ```bash
-   ls -la ~/.config/alacritty/colors.toml
-   ls -la ~/.config/ghostty/theme-active
-   ```
-
-2. Verify your config imports the generated file
-
-3. Restart your terminal
-
-### Colors Look Wrong
-
-- Ensure your terminal supports 256 colors
-- Check `$TERM` variable: `echo $TERM`
-- Should be `xterm-256color` or similar
-
-### Python Errors
-
-- Ensure Python 3.11+ is installed (for `tomllib`)
-- Test converter manually:
-  ```bash
-  python3 themes/converters/to_alacritty.py themes/schemes/sakura-dark.toml
-  ```
-
-## 🔮 Future Enhancements
-
-Planned features:
-- [ ] Fish shell theme conversion
-- [ ] Starship prompt theme conversion
-- [ ] Helix editor theme conversion
-- [ ] System-aware light/dark mode switching
-- [ ] Theme preview before applying
-- [ ] More built-in themes
+- **Monochrome for focus:** Research shows reduced color variety improves concentration
+- **Warm tones at night:** Reduces blue light exposure, preserves melatonin production
+- **High contrast for errors:** Pre-attentive processing makes red stand out automatically
+- **Earth tones for calm:** Studies show natural colors reduce stress and cortisol
 
 ## 📚 Resources
 
-- [Alacritty Color Configuration](https://alacritty.org/config-alacritty.html#colors)
-- [Ghostty Theme Documentation](https://ghostty.org/docs/config/reference)
-- [Color Scheme Gallery](https://github.com/mbadolato/iTerm2-Color-Schemes)
+- [Color Psychology in Design](https://www.toptal.com/designers/ux/color-in-ux)
+- [Blue Light and Sleep](https://www.health.harvard.edu/staying-healthy/blue-light-has-a-dark-side)
+- [Focus and Distraction Research](https://www.nature.com/articles/s41562-019-0680-1)
 
 ---
 
-For more information, see the main [README.md](../README.md)
+**Remember:** These themes are tools, not decorations. Use them intentionally to enhance your workflow.

@@ -1,0 +1,39 @@
+[meta]
+name = "Deep Focus"
+variant = "dark"
+description = "Monochromatic design for deep work - eliminates color distractions to maximize concentration"
+purpose = "Long coding sessions requiring intense focus. Removes color variety to reduce cognitive load."
+best_for = ["Deep work", "Complex debugging", "Architecture planning", "Extended focus sessions"]
+
+[colors.base]
+background = "#0d1117"
+foreground = "#c9d1d9"
+cursor = "#58a6ff"
+selection_bg = "#264f78"
+selection_fg = "#ffffff"
+
+[colors.ansi]
+black = "#484f58"
+red = "#8b949e"
+green = "#8b949e"
+yellow = "#8b949e"
+blue = "#58a6ff"
+magenta = "#8b949e"
+cyan = "#79c0ff"
+white = "#b1bac4"
+
+[colors.bright]
+black = "#6e7681"
+red = "#b1bac4"
+green = "#b1bac4"
+yellow = "#b1bac4"
+blue = "#79c0ff"
+magenta = "#b1bac4"
+cyan = "#a5d6ff"
+white = "#f0f6fc"
+
+[colors.semantic]
+error = "#58a6ff"
+warning = "#79c0ff"
+success = "#8b949e"
+info = "#58a6ff"

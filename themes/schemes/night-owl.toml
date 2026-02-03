@@ -1,0 +1,39 @@
+[meta]
+name = "Night Owl"
+variant = "dark"
+description = "Low blue light emission for late-night coding - warm amber tones reduce eye strain and preserve circadian rhythm"
+purpose = "Late night work (8PM-2AM). Reduces blue light to minimize sleep disruption while maintaining readability."
+best_for = ["Late night coding", "Reducing eye strain", "Preserving sleep cycle", "Extended evening sessions"]
+
+[colors.base]
+background = "#1e1813"
+foreground = "#d6c8af"
+cursor = "#ffb454"
+selection_bg = "#3e3428"
+selection_fg = "#ffe8c5"
+
+[colors.ansi]
+black = "#2a2318"
+red = "#e67e80"
+green = "#a7c080"
+yellow = "#dbbc7f"
+blue = "#d699b6"
+magenta = "#d699b6"
+cyan = "#83c092"
+white = "#d6c8af"
+
+[colors.bright]
+black = "#4a4338"
+red = "#f28779"
+green = "#b8d890"
+yellow = "#f0d0a0"
+blue = "#e6aac7"
+magenta = "#e6aac7"
+cyan = "#95d5a0"
+white = "#ffe8c5"
+
+[colors.semantic]
+error = "#e67e80"
+warning = "#dbbc7f"
+success = "#a7c080"
+info = "#d699b6"

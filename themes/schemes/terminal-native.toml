@@ -1,0 +1,39 @@
+[meta]
+name = "Terminal Native"
+variant = "dark"
+description = "Optimized for CLI-heavy workflows - prioritizes shell output readability and log parsing"
+purpose = "DevOps work, system administration, log analysis. Enhanced colors for common terminal outputs."
+best_for = ["DevOps workflows", "System administration", "Log parsing", "CLI-heavy tasks", "SSH sessions"]
+
+[colors.base]
+background = "#0c0c0c"
+foreground = "#cccccc"
+cursor = "#ffffff"
+selection_bg = "#404040"
+selection_fg = "#ffffff"
+
+[colors.ansi]
+black = "#0c0c0c"
+red = "#e74856"
+green = "#16c60c"
+yellow = "#f9f1a5"
+blue = "#3b78ff"
+magenta = "#b4009e"
+cyan = "#61d6d6"
+white = "#cccccc"
+
+[colors.bright]
+black = "#767676"
+red = "#e74856"
+green = "#16c60c"
+yellow = "#f9f1a5"
+blue = "#3b78ff"
+magenta = "#b4009e"
+cyan = "#61d6d6"
+white = "#f2f2f2"
+
+[colors.semantic]
+error = "#e74856"
+warning = "#f9f1a5"
+success = "#16c60c"
+info = "#3b78ff"

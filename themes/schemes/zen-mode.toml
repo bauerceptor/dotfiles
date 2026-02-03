@@ -1,0 +1,39 @@
+[meta]
+name = "Zen Mode"
+variant = "dark"
+description = "Calming earth tones for sustained focus - inspired by Japanese tea rooms and minimalism"
+purpose = "Meditation on code, refactoring, thoughtful design. Calming palette reduces stress and promotes clarity."
+best_for = ["Refactoring", "Architecture design", "Thoughtful coding", "Reducing stress", "Long sessions"]
+
+[colors.base]
+background = "#1f1f1f"
+foreground = "#c5c5c5"
+cursor = "#b8a898"
+selection_bg = "#3a3a3a"
+selection_fg = "#e8e8e8"
+
+[colors.ansi]
+black = "#2a2a2a"
+red = "#c88a8a"
+green = "#a8b8a8"
+yellow = "#d0c090"
+blue = "#9fb3c8"
+magenta = "#b8a0b8"
+cyan = "#90b8b8"
+white = "#c5c5c5"
+
+[colors.bright]
+black = "#555555"
+red = "#d8b0b0"
+green = "#c0d0c0"
+yellow = "#e0d8b0"
+blue = "#b8c8d8"
+magenta = "#c8b8c8"
+cyan = "#b0d0d0"
+white = "#e8e8e8"
+
+[colors.semantic]
+error = "#c88a8a"
+warning = "#d0c090"
+success = "#a8b8a8"
+info = "#9fb3c8"
