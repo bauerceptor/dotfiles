@@ -1,0 +1,37 @@
+[meta]
+name = "Sakura Light"
+variant = "light"
+description = "Daytime cherry blossom, soft and airy"
+
+[colors.base]
+background = "#fdf6f6"
+foreground = "#4a3540"
+cursor = "#d47a8a"
+selection_bg = "#f4c7d0"
+selection_fg = "#fdf6f6"
+
+[colors.ansi]
+black = "#4a3540"
+red = "#c24a5a"
+green = "#5a8a6a"
+yellow = "#b08040"
+blue = "#6a70a0"
+magenta = "#a05a7a"
+cyan = "#507a80"
+white = "#f0e8e8"
+
+[colors.bright]
+black = "#6a5560"
+red = "#d45a6a"
+green = "#6a9a7a"
+yellow = "#c09050"
+blue = "#7a80b0"
+magenta = "#b06a8a"
+cyan = "#608a90"
+white = "#fdf6f6"
+
+[colors.semantic]
+error = "#d45a6a"
+warning = "#c09050"
+success = "#6a9a7a"
+info = "#7a80b0"

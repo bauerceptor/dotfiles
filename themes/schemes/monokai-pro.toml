@@ -1,0 +1,39 @@
+[meta]
+name = "Monokai Pro"
+variant = "dark"
+description = "Professional theme with warm colors"
+url = "https://monokai.pro/"
+preview = "https://monokai.pro/"
+
+[colors.base]
+background = "#2d2a2e"
+foreground = "#fcfcfa"
+cursor = "#fcfcfa"
+selection_bg = "#5b595c"
+selection_fg = "#fcfcfa"
+
+[colors.ansi]
+black = "#403e41"
+red = "#ff6188"
+green = "#a9dc76"
+yellow = "#ffd866"
+blue = "#fc9867"
+magenta = "#ab9df2"
+cyan = "#78dce8"
+white = "#fcfcfa"
+
+[colors.bright]
+black = "#727072"
+red = "#ff6188"
+green = "#a9dc76"
+yellow = "#ffd866"
+blue = "#fc9867"
+magenta = "#ab9df2"
+cyan = "#78dce8"
+white = "#fcfcfa"
+
+[colors.semantic]
+error = "#ff6188"
+warning = "#ffd866"
+success = "#a9dc76"
+info = "#78dce8"

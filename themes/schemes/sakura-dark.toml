@@ -1,0 +1,37 @@
+[meta]
+name = "Sakura Dark"
+variant = "dark"
+description = "Soft cherry blossom pinks, gentle and dreamy"
+
+[colors.base]
+background = "#1a1521"
+foreground = "#e8d4d4"
+cursor = "#f4a7b9"
+selection_bg = "#f4a7b9"
+selection_fg = "#1a1521"
+
+[colors.ansi]
+black = "#2a1f2d"
+red = "#e84a5f"
+green = "#a8e6cf"
+yellow = "#ffaaa5"
+blue = "#a8a4ce"
+magenta = "#f4a7b9"
+cyan = "#c9b1ff"
+white = "#e8d4d4"
+
+[colors.bright]
+black = "#4a3f4d"
+red = "#ff6b81"
+green = "#bef0db"
+yellow = "#ffc3bf"
+blue = "#beb8db"
+magenta = "#ffb7c5"
+cyan = "#d9c7ff"
+white = "#fff0f0"
+
+[colors.semantic]
+error = "#ff6b81"
+warning = "#ffc3bf"
+success = "#bef0db"
+info = "#beb8db"

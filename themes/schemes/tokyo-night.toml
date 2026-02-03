@@ -1,0 +1,39 @@
+[meta]
+name = "Tokyo Night"
+variant = "dark"
+description = "A clean dark theme inspired by the city lights of Tokyo"
+url = "https://github.com/tokyo-night/tokyo-night-vscode-theme"
+preview = "https://github.com/enkia/tokyo-night-vscode-theme#screenshots"
+
+[colors.base]
+background = "#1a1b26"
+foreground = "#c0caf5"
+cursor = "#c0caf5"
+selection_bg = "#33467c"
+selection_fg = "#c0caf5"
+
+[colors.ansi]
+black = "#15161e"
+red = "#f7768e"
+green = "#9ece6a"
+yellow = "#e0af68"
+blue = "#7aa2f7"
+magenta = "#bb9af7"
+cyan = "#7dcfff"
+white = "#a9b1d6"
+
+[colors.bright]
+black = "#414868"
+red = "#f7768e"
+green = "#9ece6a"
+yellow = "#e0af68"
+blue = "#7aa2f7"
+magenta = "#bb9af7"
+cyan = "#7dcfff"
+white = "#c0caf5"
+
+[colors.semantic]
+error = "#f7768e"
+warning = "#e0af68"
+success = "#9ece6a"
+info = "#7aa2f7"

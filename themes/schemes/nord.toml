@@ -1,0 +1,37 @@
+[meta]
+name = "Nord"
+variant = "dark"
+description = "Arctic, north-bluish color palette"
+
+[colors.base]
+background = "#2e3440"
+foreground = "#d8dee9"
+cursor = "#d8dee9"
+selection_bg = "#4c566a"
+selection_fg = "#d8dee9"
+
+[colors.ansi]
+black = "#3b4252"
+red = "#bf616a"
+green = "#a3be8c"
+yellow = "#ebcb8b"
+blue = "#81a1c1"
+magenta = "#b48ead"
+cyan = "#88c0d0"
+white = "#e5e9f0"
+
+[colors.bright]
+black = "#4c566a"
+red = "#bf616a"
+green = "#a3be8c"
+yellow = "#ebcb8b"
+blue = "#81a1c1"
+magenta = "#b48ead"
+cyan = "#8fbcbb"
+white = "#eceff4"
+
+[colors.semantic]
+error = "#bf616a"
+warning = "#ebcb8b"
+success = "#a3be8c"
+info = "#81a1c1"
