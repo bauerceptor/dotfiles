@@ -1,0 +1,39 @@
+[meta]
+name = "Melange Light"
+variant = "light"
+description = "Warm, cozy light colorscheme with earthy tones"
+url = "https://github.com/savq/melange-nvim"
+aesthetic = "Warm creams and browns, comfortable for extended reading"
+
+[colors.base]
+background = "#f1f1f0"
+foreground = "#54433a"
+cursor = "#7d6658"
+selection_bg = "#e9e1db"
+selection_fg = "#54433a"
+
+[colors.ansi]
+black = "#c1a78e"
+red = "#b65c60"
+green = "#78997a"
+yellow = "#c29830"
+blue = "#7f91b2"
+magenta = "#b380b0"
+cyan = "#7b9695"
+white = "#54433a"
+
+[colors.bright]
+black = "#a38d78"
+red = "#b65c60"
+green = "#78997a"
+yellow = "#c29830"
+blue = "#7f91b2"
+magenta = "#b380b0"
+cyan = "#7b9695"
+white = "#54433a"
+
+[colors.semantic]
+error = "#b65c60"
+warning = "#c29830"
+success = "#78997a"
+info = "#7f91b2"

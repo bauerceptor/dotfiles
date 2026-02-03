@@ -1,0 +1,39 @@
+[meta]
+name = "Rosé Pine"
+variant = "dark"
+description = "All natural pine, faux fur and a bit of soho vibes for the classy minimalist"
+url = "https://rosepinetheme.com/"
+aesthetic = "Low contrast, cozy, soho-inspired minimalism"
+
+[colors.base]
+background = "#191724"
+foreground = "#e0def4"
+cursor = "#524f67"
+selection_bg = "#2a273f"
+selection_fg = "#e0def4"
+
+[colors.ansi]
+black = "#26233a"
+red = "#eb6f92"
+green = "#9ccfd8"
+yellow = "#f6c177"
+blue = "#31748f"
+magenta = "#c4a7e7"
+cyan = "#ebbcba"
+white = "#e0def4"
+
+[colors.bright]
+black = "#6e6a86"
+red = "#eb6f92"
+green = "#9ccfd8"
+yellow = "#f6c177"
+blue = "#31748f"
+magenta = "#c4a7e7"
+cyan = "#ebbcba"
+white = "#e0def4"
+
+[colors.semantic]
+error = "#eb6f92"
+warning = "#f6c177"
+success = "#9ccfd8"
+info = "#31748f"

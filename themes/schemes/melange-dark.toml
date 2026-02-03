@@ -1,0 +1,39 @@
+[meta]
+name = "Melange Dark"
+variant = "dark"
+description = "Warm, cozy colorscheme with a focus on readability and low contrast"
+url = "https://github.com/savq/melange-nvim"
+aesthetic = "Warm browns and oranges, easy on the eyes, cozy"
+
+[colors.base]
+background = "#292522"
+foreground = "#ece1d7"
+cursor = "#867462"
+selection_bg = "#403a36"
+selection_fg = "#ece1d7"
+
+[colors.ansi]
+black = "#34302c"
+red = "#d47766"
+green = "#85b695"
+yellow = "#ebc06d"
+blue = "#a3a9ce"
+magenta = "#cf9bc2"
+cyan = "#89b3b6"
+white = "#c1a78e"
+
+[colors.bright]
+black = "#867462"
+red = "#d47766"
+green = "#85b695"
+yellow = "#ebc06d"
+blue = "#a3a9ce"
+magenta = "#cf9bc2"
+cyan = "#89b3b6"
+white = "#ece1d7"
+
+[colors.semantic]
+error = "#d47766"
+warning = "#ebc06d"
+success = "#85b695"
+info = "#a3a9ce"

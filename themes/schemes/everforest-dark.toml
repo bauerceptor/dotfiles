@@ -1,0 +1,39 @@
+[meta]
+name = "Everforest Dark"
+variant = "dark"
+description = "Comfortable green forest theme designed to reduce eye strain"
+url = "https://github.com/sainnhe/everforest"
+aesthetic = "Natural, forest-inspired, easy on the eyes"
+
+[colors.base]
+background = "#2b3339"
+foreground = "#d3c6aa"
+cursor = "#d3c6aa"
+selection_bg = "#503946"
+selection_fg = "#d3c6aa"
+
+[colors.ansi]
+black = "#374247"
+red = "#e67e80"
+green = "#a7c080"
+yellow = "#dbbc7f"
+blue = "#7fbbb3"
+magenta = "#d699b6"
+cyan = "#83c092"
+white = "#d3c6aa"
+
+[colors.bright]
+black = "#5a6268"
+red = "#e67e80"
+green = "#a7c080"
+yellow = "#dbbc7f"
+blue = "#7fbbb3"
+magenta = "#d699b6"
+cyan = "#83c092"
+white = "#d3c6aa"
+
+[colors.semantic]
+error = "#e67e80"
+warning = "#dbbc7f"
+success = "#a7c080"
+info = "#7fbbb3"

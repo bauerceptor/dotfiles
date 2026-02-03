@@ -1,0 +1,39 @@
+[meta]
+name = "Kanagawa Dragon"
+variant = "dark"
+description = "Dark dragon theme inspired by famous painting 'The Great Wave off Kanagawa'"
+url = "https://github.com/rebelot/kanagawa.nvim"
+aesthetic = "Japanese art-inspired, warm colors, earthy tones"
+
+[colors.base]
+background = "#181616"
+foreground = "#c5c9c5"
+cursor = "#c8c093"
+selection_bg = "#2d4f67"
+selection_fg = "#c8c093"
+
+[colors.ansi]
+black = "#0d0c0c"
+red = "#c4746e"
+green = "#8a9a7b"
+yellow = "#c4b28a"
+blue = "#8ba4b0"
+magenta = "#a292a3"
+cyan = "#8ea4a2"
+white = "#c8c093"
+
+[colors.bright]
+black = "#a6a69c"
+red = "#e46876"
+green = "#87a987"
+yellow = "#e6c384"
+blue = "#7fb4ca"
+magenta = "#938aa9"
+cyan = "#7aa89f"
+white = "#c5c9c5"
+
+[colors.semantic]
+error = "#c4746e"
+warning = "#c4b28a"
+success = "#8a9a7b"
+info = "#8ba4b0"

@@ -8,6 +8,14 @@ These aren't just color schemes - they're **workflow tools**. Each theme is craf
 
 ## 🎨 Available Themes
 
+We offer two categories: **Purpose-Driven** (workflow optimization) and **Aesthetic** (lesser-known beautiful themes).
+
+---
+
+## 🎯 Purpose-Driven Themes
+
+*Choose based on what you're doing, not just aesthetics*
+
 ### 🧠 Deep Focus
 **When:** Complex problems requiring intense concentration
 **Purpose:** Monochromatic design eliminates color distractions
@@ -152,6 +160,87 @@ These aren't just color schemes - they're **workflow tools**. Each theme is craf
 
 ---
 
+## 🌸 Aesthetic Themes
+
+*Lesser-known gems with unique visual identities*
+
+### 🎨 Kanagawa Collection
+Inspired by "The Great Wave off Kanagawa" - Japanese art meets terminal
+
+**Kanagawa Dragon** *(Dark)*
+- Darkest variant with warm, earthy tones
+- Deep blacks with subtle warmth
+- **Aesthetic:** Japanese art, warm colors, cozy
+- **URL:** https://github.com/rebelot/kanagawa.nvim
+
+**Kanagawa Wave** *(Dark)*
+- Original balanced variant
+- Harmonious blues and greens
+- **Aesthetic:** Balanced, oceanic, calming
+
+**Kanagawa Lotus** *(Light)*
+- Serene lotus floating on water
+- Soft light theme with warmth
+- **Aesthetic:** Peaceful, warm light, Japanese minimalism
+
+### 🌲 Everforest Collection
+Natural forest theme designed to reduce eye strain
+
+**Everforest Dark** *(Dark)*
+- Comfortable green forest theme
+- Easy on the eyes for long sessions
+- **Aesthetic:** Natural, forest-inspired, restful
+- **URL:** https://github.com/sainnhe/everforest
+
+**Everforest Light** *(Light)*
+- Warm natural light variant
+- Soft, comfortable colors
+- **Aesthetic:** Warm light, natural, comfortable
+
+### 🌹 Rosé Pine Collection
+All natural pine, faux fur and a bit of soho vibes
+
+**Rosé Pine** *(Dark)*
+- Low contrast, cozy minimalism
+- Soho-inspired elegance
+- **Aesthetic:** Classy minimalist, low contrast, cozy
+- **URL:** https://rosepinetheme.com/
+
+**Rosé Pine Dawn** *(Light)*
+- Warm and welcoming for early risers
+- Soft, comfortable light theme
+- **Aesthetic:** Welcoming, warm, sophisticated
+
+### 🏮 Ayu Collection
+Simple, bright and elegant
+
+**Ayu Dark** *(Dark)*
+- Bright with yellow accents
+- Modern and clean
+- **Aesthetic:** Bright, clean, modern
+- **URL:** https://github.com/ayu-theme/ayu-colors
+
+**Ayu Light** *(Light)*
+- Clean bright light variant
+- Warm accents, easy to read
+- **Aesthetic:** Clean, bright, welcoming
+
+### 🍂 Melange Collection
+Warm, cozy colorscheme with low contrast
+
+**Melange Dark** *(Dark)*
+- Warm browns and oranges
+- Easy on the eyes, very cozy
+- **Aesthetic:** Warm, cozy, comfortable
+- **URL:** https://github.com/savq/melange-nvim
+
+**Melange Light** *(Light)*
+- Warm creams and earthy tones
+- Comfortable for extended reading
+- **Aesthetic:** Warm, earthy, comfortable
+
+---
+
 ## 🚀 Usage
 
 ### List All Themes
@@ -162,20 +251,17 @@ cd ~/.dotfiles
 
 ### Apply By Purpose
 ```bash
-# Starting deep work session
-./scripts/switch-theme.sh deep-focus alacritty
+# Purpose-driven themes
+./scripts/switch-theme.sh deep-focus alacritty       # Starting deep work
+./scripts/switch-theme.sh code-review ghostty        # Reviewing PRs
+./scripts/switch-theme.sh night-owl all              # Late night coding
+./scripts/switch-theme.sh debugging-mode alacritty   # Bug hunting
 
-# About to review PRs
-./scripts/switch-theme.sh code-review ghostty
-
-# Late night coding
-./scripts/switch-theme.sh night-owl all
-
-# Morning productivity
-./scripts/switch-theme.sh morning-boost all
-
-# Debugging a critical issue
-./scripts/switch-theme.sh debugging-mode alacritty
+# Aesthetic themes
+./scripts/switch-theme.sh kanagawa-wave all          # Japanese elegance
+./scripts/switch-theme.sh rose-pine-dawn alacritty   # Warm morning light
+./scripts/switch-theme.sh everforest-dark ghostty    # Natural forest
+./scripts/switch-theme.sh ayu-light all              # Clean and bright
 ```
 
 ### Different Themes Per Tool

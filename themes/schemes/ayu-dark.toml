@@ -1,0 +1,39 @@
+[meta]
+name = "Ayu Dark"
+variant = "dark"
+description = "Simple, bright and elegant theme - dark variant"
+url = "https://github.com/ayu-theme/ayu-colors"
+aesthetic = "Bright, clean, modern with yellow accents"
+
+[colors.base]
+background = "#0a0e14"
+foreground = "#b3b1ad"
+cursor = "#e6b450"
+selection_bg = "#273747"
+selection_fg = "#b3b1ad"
+
+[colors.ansi]
+black = "#01060e"
+red = "#ea6c73"
+green = "#91b362"
+yellow = "#f9af4f"
+blue = "#53bdfa"
+magenta = "#fae994"
+cyan = "#90e1c6"
+white = "#c7c7c7"
+
+[colors.bright]
+black = "#686868"
+red = "#f07178"
+green = "#c2d94c"
+yellow = "#ffb454"
+blue = "#59c2ff"
+magenta = "#ffee99"
+cyan = "#95e6cb"
+white = "#ffffff"
+
+[colors.semantic]
+error = "#ea6c73"
+warning = "#f9af4f"
+success = "#91b362"
+info = "#53bdfa"

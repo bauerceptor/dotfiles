@@ -1,0 +1,39 @@
+[meta]
+name = "Kanagawa Wave"
+variant = "dark"
+description = "Original Kanagawa wave theme - balanced and harmonious"
+url = "https://github.com/rebelot/kanagawa.nvim"
+aesthetic = "Japanese art-inspired, balanced blues and greens"
+
+[colors.base]
+background = "#1f1f28"
+foreground = "#dcd7ba"
+cursor = "#c8c093"
+selection_bg = "#2d4f67"
+selection_fg = "#c8c093"
+
+[colors.ansi]
+black = "#090618"
+red = "#c34043"
+green = "#76946a"
+yellow = "#c0a36e"
+blue = "#7e9cd8"
+magenta = "#957fb8"
+cyan = "#6a9589"
+white = "#c8c093"
+
+[colors.bright]
+black = "#727169"
+red = "#e82424"
+green = "#98bb6c"
+yellow = "#e6c384"
+blue = "#7fb4ca"
+magenta = "#938aa9"
+cyan = "#7aa89f"
+white = "#dcd7ba"
+
+[colors.semantic]
+error = "#e82424"
+warning = "#e6c384"
+success = "#98bb6c"
+info = "#7fb4ca"
