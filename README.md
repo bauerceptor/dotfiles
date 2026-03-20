@@ -1,4 +1,4 @@
-# Ember's Dotfiles
+# Dotfiles
 
 Modern, cross-platform dotfiles for developers. Supports Linux distributions (Fedora, Ubuntu, Arch) with platform-agnostic configurations.
 

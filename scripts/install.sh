@@ -18,6 +18,7 @@ PACKAGES=(
     "helix"
     "lazygit"
     "lazyvim"
+    "noctalia"
     "starship"
     "vscode"
     "yazi"

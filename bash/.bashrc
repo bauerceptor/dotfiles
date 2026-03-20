@@ -75,8 +75,8 @@ export BAT_THEME="TwoDark"
 # Homebrew (platform-agnostic)
 if command -v brew &>/dev/null; then
     eval "$(brew shellenv bash)"
-elif [ -d /home/linuxbrew/.linuxbrew ]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+elif [ -d "$HOME/.linuxbrew" ]; then
+    eval "$($HOME/.linuxbrew/bin/brew shellenv bash)"
 elif [ -d /opt/homebrew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv bash)"
 fi

@@ -171,7 +171,7 @@ Each tool's theme is managed separately:
 ### Environment Variables
 
 All paths use environment variables:
-- `$HOME` instead of `/home/ember`
+- `$HOME` instead of hardcoded paths like `/home/username`
 - `$XDG_CONFIG_HOME` for config paths (when available)
 - Shell paths resolved from `$PATH`
 
@@ -204,10 +204,10 @@ Configs use flexible detection:
 # Example: Homebrew detection
 if command -v brew; then
     eval "$(brew shellenv)"
-elif [ -d /home/linuxbrew/.linuxbrew ]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ -d "$HOME/.linuxbrew" ]; then
+    eval "($HOME/.linuxbrew/bin/brew shellenv)"
 elif [ -d /opt/homebrew ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    eval "(/opt/homebrew/bin/brew shellenv)"
 fi
 ```
 

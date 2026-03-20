@@ -22,15 +22,15 @@ end
 # Inspect your yarn and npm config:
 #
 #     $ yarn global dir
-#       /home/yourname/.config/yarn/global
+#       $HOME/.config/yarn/global
 #
 #     $ yarn config get prefix
-#       /home/yourname/.node_modules
+#       $HOME/.node_modules
 #
 #     $ npm config get prefix
-#       /home/yourname/.node_modules
+#       $HOME/.node_modules
 #
 # If not, set it:
 #
-#     $ npm config set prefix /home/yourname/.node_modules
-#     $ yarn config set prefix /home/yourname/.node_modules
+#     $ npm config set prefix $HOME/.node_modules
+#     $ yarn config set prefix $HOME/.node_modules

@@ -133,7 +133,7 @@ Host github.com
 # Work server
 Host work
     HostName work.example.com
-    User ember
+    User $USER
     IdentityFile ~/.ssh/work_ed25519
     Port 22
 
@@ -153,7 +153,7 @@ Host internal
 Now you can just:
 
 ```bash
-ssh work      # Instead of: ssh -i ~/.ssh/work_ed25519 ember@work.example.com
+ssh work      # Instead of: ssh -i ~/.ssh/work_ed25519 $USER@work.example.com
 ssh vps       # Instead of: ssh -i ~/.ssh/personal_ed25519 root@123.45.67.89
 ```
 
