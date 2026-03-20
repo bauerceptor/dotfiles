@@ -740,3 +740,20 @@ eval "$(starship init bash)"
 # ═══════════════════════════════════════════════════════════════════════════
 
 [[ ${BLE_VERSION-} ]] && ble-attach
+
+# pnpm
+export PNPM_HOME="/home/red/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# fnm
+FNM_PATH="/home/red/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "$(fnm env --shell bash)"
+fi
+eval "$(uv generate-shell-completion bash)"
+eval "$(uvx --generate-shell-completion bash)"
