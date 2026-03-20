@@ -122,8 +122,13 @@ for bc_path in /usr/share/bash-completion/bash_completion \
 done
 
 # Source additional configs
+# Also source from dotfiles if ~/.bashrc.d doesn't exist locally
 if [ -d ~/.bashrc.d ]; then
     for rc in ~/.bashrc.d/*; do
+        [[ -f "$rc" ]] && . "$rc"
+    done
+elif [ -d ~/.dotfiles/bash/.bashrc.d ]; then
+    for rc in ~/.dotfiles/bash/.bashrc.d/*; do
         [[ -f "$rc" ]] && . "$rc"
     done
 fi

@@ -348,7 +348,7 @@ if status is-interactive
         abbr -a r 'bin/rails'
         abbr -a rs 'bin/rails server'
         abbr -a rc 'bin/rails console'
-        abbr -a rg 'bin/rails generate'
+        abbr -a rlg 'bin/rails generate'
         abbr -a rd 'bin/rails destroy'
         abbr -a rdb 'bin/rails db:migrate'
         abbr -a rdbs 'bin/rails db:migrate:status'

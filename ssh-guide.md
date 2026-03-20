@@ -52,7 +52,7 @@ You'll see:
 
 ```
 Generating public/private ed25519 key pair.
-Enter file in which to save the key (/home/ember/.ssh/id_ed25519):
+Enter file in which to save the key (/home/$USER/.ssh/id_ed25519):
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
 ```
