@@ -515,6 +515,7 @@ binds {
 //Autostart
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "qs" "-c" "noctalia-shell"
 
 // Environment Variables
 environment {
