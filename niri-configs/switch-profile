@@ -1,0 +1,187 @@
+#!/usr/bin/env bash
+# Niri Config Profile Switcher using stow
+# Usage: ./switch-profile <profile-name>
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+STOW_DIR="$HOME/.dotfiles"
+CURRENT_PROFILE_FILE="$HOME/.config/niri-profile"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+list_profiles() {
+    echo "Available profiles:"
+    for profile in "$SCRIPT_DIR"/*/; do
+        if [ -d "$profile" ] && [ -f "$profile/install.sh" ]; then
+            name=$(basename "$profile")
+            echo "  - $name"
+        fi
+    done
+}
+
+show_current() {
+    if [ -f "$CURRENT_PROFILE_FILE" ]; then
+        echo "Current profile: $(cat "$CURRENT_PROFILE_FILE")"
+    else
+        echo "No profile selected"
+    fi
+}
+
+unstow_all() {
+    echo -e "${YELLOW}Unstowing any existing niri configs...${NC}"
+    cd "$STOW_DIR"
+
+    if command -v stow &>/dev/null; then
+        # Get list of configs that would be stowed
+        for config in niri waybar fuzzel rofi hypr hyprlock ghostty dunst mako gtklock fastfetch kitty; do
+            target="$HOME/.config/$config"
+            if [ -L "$target" ]; then
+                rm "$target"
+                echo "  Removed: $config"
+            fi
+        done
+    fi
+
+    # Clean up old profile symlinks
+    if [ -L "$HOME/.config/niri" ]; then
+        rm "$HOME/.config/niri"
+    fi
+}
+
+apply_config() {
+    local profile="$1"
+    local profile_dir="$SCRIPT_DIR/$profile"
+
+    if [ ! -d "$profile_dir" ]; then
+        echo -e "${RED}Profile '$profile' not found${NC}"
+        exit 1
+    fi
+
+    echo -e "${GREEN}Applying profile: $profile${NC}"
+
+    # Change to dotfiles directory
+    cd "$STOW_DIR"
+
+    # Use stow to symlink the profile's configs
+    if command -v stow &>/dev/null; then
+        echo "Using stow to apply configs..."
+        stow -v -t "$HOME" niri-configs
+    else
+        echo -e "${YELLOW}Stow not found, using manual symlinks...${NC}"
+        mkdir -p "$HOME/.config"
+
+        for config_dir in "$profile_dir"/*/; do
+            if [ -d "$config_dir" ]; then
+                name=$(basename "$config_dir")
+                target="$HOME/.config/$name"
+
+                # Remove existing symlink if it exists
+                if [ -L "$target" ]; then
+                    rm "$target"
+                elif [ -e "$target" ]; then
+                    echo "Backing up existing $name to $name.backup"
+                    mv "$target" "$target.backup"
+                fi
+
+                ln -s "$config_dir" "$target"
+                echo "Linked $name"
+            fi
+        done
+    fi
+
+    # Link wallpapers if exists
+    if [ -d "$profile_dir/wallpapers" ]; then
+        mkdir -p "$HOME/Pictures/Wallpapers"
+        ln -sf "$profile_dir/wallpapers" "$HOME/Pictures/Wallpapers/$profile"
+        echo "Linked wallpapers"
+    fi
+
+    # Save current profile
+    echo "$profile" > "$CURRENT_PROFILE_FILE"
+
+    echo -e "${GREEN}Profile '$profile' applied successfully!${NC}"
+}
+
+run_install() {
+    local profile="$1"
+    local install_script="$SCRIPT_DIR/$profile/install.sh"
+
+    if [ -x "$install_script" ]; then
+        echo -e "${BLUE}Running install script for $profile...${NC}"
+        bash "$install_script"
+    else
+        echo -e "${YELLOW}No install script found for $profile${NC}"
+    fi
+}
+
+show_usage() {
+    echo "Usage: $0 <profile-name>"
+    echo "       $0 --list"
+    echo "       $0 --current"
+    echo "       $0 --install <profile-name>  # Only install packages"
+    echo "       $0 --config-only <profile-name>  # Only apply configs"
+    echo ""
+    list_profiles
+}
+
+# Main
+case "${1:-}" in
+    --list|-l)
+        list_profiles
+        ;;
+    --current|-c)
+        show_current
+        ;;
+    --install|-i)
+        if [ -z "${2:-}" ]; then
+            echo -e "${RED}Error: Profile name required${NC}"
+            exit 1
+        fi
+        run_install "$2"
+        ;;
+    --config-only|--config)
+        if [ -z "${2:-}" ]; then
+            echo -e "${RED}Error: Profile name required${NC}"
+            exit 1
+        fi
+        unstow_all
+        apply_config "$2"
+        echo ""
+        echo -e "${GREEN}Done!${NC}"
+        ;;
+    --help|-h)
+        show_usage
+        ;;
+    "")
+        show_usage
+        exit 1
+        ;;
+    *)
+        profile="$1"
+
+        # Check if profile exists
+        if [ ! -d "$SCRIPT_DIR/$profile" ]; then
+            echo -e "${RED}Profile '$profile' not found${NC}"
+            list_profiles
+            exit 1
+        fi
+
+        # Unstow any existing configs first
+        unstow_all
+
+        # Run install script first
+        run_install "$profile"
+
+        # Then apply config
+        apply_config "$profile"
+
+        echo ""
+        echo -e "${GREEN}Done! Log out and select niri at login screen.${NC}"
+        ;;
+esac
