@@ -757,3 +757,5 @@ if [ -d "$FNM_PATH" ]; then
 fi
 eval "$(uv generate-shell-completion bash)"
 eval "$(uvx --generate-shell-completion bash)"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/share/fnm:$PATH"

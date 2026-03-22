@@ -1,0 +1,183 @@
+---
+# main.yml - Core tools and Homebrew installation
+# Usage: ansible-playbook main.yml --become
+# Tags: main, core, brew, all
+
+- name: Install core tools
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: true
+
+  vars:
+    # Package selection - set to false to skip
+    install_git: true
+    install_stow: true
+    install_curl: true
+    install_wget: true
+    install_uv: true
+    install_brew: true
+    install_bash_completion: true
+
+  tags:
+    - main
+    - core
+    - brew
+    - all
+
+  tasks:
+    # =========================================================================
+    # Core packages via package module (idempotent by default)
+    # =========================================================================
+
+    - name: Install git
+      ansible.builtin.package:
+        name: git
+        state: present
+      when: install_git | bool
+
+    - name: Install stow
+      ansible.builtin.package:
+        name: stow
+        state: present
+      when: install_stow | bool
+
+    - name: Install curl
+      ansible.builtin.package:
+        name: curl
+        state: present
+      when: install_curl | bool
+
+    - name: Install wget
+      ansible.builtin.package:
+        name: wget
+        state: present
+      when: install_wget | bool
+
+    - name: Install bash-completion
+      ansible.builtin.package:
+        name: bash-completion
+        state: present
+      when: install_bash_completion | bool
+
+    # =========================================================================
+    # UV Installation (Python package manager)
+    # =========================================================================
+
+    - name: Check if uv is installed
+      ansible.builtin.command:
+        cmd: which uv
+      register: uv_check
+      failed_when: false
+      changed_when: false
+      when: install_uv | bool
+
+    - name: Install uv
+      ansible.builtin.shell:
+        cmd: curl -LsSf https://astral.sh/uv/install.sh | sh
+      when:
+        - install_uv | bool
+        - uv_check.rc != 0
+
+    - name: Add uv to PATH (bash)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.bashrc"
+        line: 'export PATH="/usr/local/bin:$PATH"'
+        create: true
+      when: install_uv | bool
+      register: uv_path_bash
+
+    - name: Add uv to PATH (fish)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.config/fish/config.fish"
+        line: 'fish_add_path -g /usr/local/bin'
+        create: true
+      when: install_uv | bool
+      register: uv_path_fish
+
+    - name: Add uv shell completions (bash)
+      ansible.builtin.shell:
+        cmd: |
+          echo 'eval "$(uv generate-shell-completion bash)"' >> "{{ lookup('env', 'HOME') }}/.bashrc"
+      when: install_uv | bool
+
+    - name: Add uv shell completions (fish)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.config/fish/completions/uv.fish"
+        line: 'uv generate-shell-completion fish | source'
+        create: true
+      when: install_uv | bool
+
+    - name: Add uvx shell completions (bash)
+      ansible.builtin.shell:
+        cmd: |
+          echo 'eval "$(uvx --generate-shell-completion bash)"' >> "{{ lookup('env', 'HOME') }}/.bashrc"
+      when: install_uv | bool
+
+    - name: Add uvx shell completions (fish)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.config/fish/completions/uvx.fish"
+        line: 'uvx --generate-shell-completion fish | source'
+        create: true
+      when: install_uv | bool
+
+    # =========================================================================
+    # Homebrew Installation
+    # =========================================================================
+
+    - name: Check if Homebrew is already installed
+      ansible.builtin.stat:
+        path: /opt/homebrew/bin/brew
+      register: brew_opt_check
+      when: install_brew | bool
+
+    - name: Check if Homebrew is already installed (Linuxbrew path)
+      ansible.builtin.stat:
+        path: /home/linuxbrew/.linuxbrew/bin/brew
+      register: brew_linuxbrew_check
+      when: install_brew | bool
+
+    - name: Check if Homebrew command exists
+      ansible.builtin.command:
+        cmd: which brew
+      register: brew_which_check
+      failed_when: false
+      changed_when: false
+      when: install_brew | bool
+
+    - name: Install Homebrew (Linux)
+      ansible.builtin.shell:
+        cmd: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      when:
+        - install_brew | bool
+        - not brew_opt_check.stat.exists
+        - not brew_linuxbrew_check.stat.exists
+        - brew_which_check.rc != 0
+
+    - name: Add Homebrew to PATH (bash)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.bashrc"
+        line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+        create: true
+      when: install_brew | bool
+      register: brew_path_bash
+
+    - name: Add Homebrew to PATH (fish)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.config/fish/config.fish"
+        line: 'eval (/opt/homebrew/bin/brew shellenv)'
+        create: true
+      when: install_brew | bool
+      register: brew_path_fish
+
+    # =========================================================================
+    # Summary
+    # =========================================================================
+
+    - name: Display installation summary
+      ansible.builtin.debug:
+        msg:
+          - "Core tools installation complete!"
+          - "Run 'ansible-playbook other.yml --become' to install additional tools"
+          - "Run 'ansible-playbook dnf.yml --become' for DNF-specific packages"

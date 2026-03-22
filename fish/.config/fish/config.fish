@@ -159,3 +159,5 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+fish_add_path -g "$HOME/.local/bin"
+fish_add_path -g "$HOME/.local/share/fnm"

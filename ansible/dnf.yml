@@ -1,0 +1,215 @@
+---
+# dnf.yml - DNF-specific packages (Fedora/RHEL only)
+# Usage: ansible-playbook dnf.yml --become
+# Tags: dnf, fedora, rhel
+
+- name: Install DNF-specific packages
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: true
+
+  vars:
+    # Package selection - set to false to skip
+    install_helix: true
+    install_bat: true
+    install_git_delta: true
+    install_duf: true
+    install_fd: true
+    install_ripgrep: true
+    install_hyperfine: true
+    install_procs: true
+    install_httpie: true
+    install_mosh: true
+    install_plocate: true
+    install_hexyl: true
+    install_tealdeer: true
+    install_versionlock: true
+    install_ghostty: true
+    install_eza: true
+    install_difftastic: true
+    install_choose: true
+    install_podman_docker: true
+    install_podman_compose: true
+
+  tags:
+    - dnf
+    - fedora
+    - rhel
+
+  tasks:
+    # Only run on RedHat-based systems
+    - name: Check OS family
+      ansible.builtin.fail:
+        msg: "This playbook only runs on RedHat-based systems (Fedora/RHEL)"
+      when: ansible_facts['os_family'] != "RedHat"
+
+    # =========================================================================
+    # Enable COPR for Ghostty
+    # =========================================================================
+
+    - name: Check if Ghostty COPR is enabled
+      ansible.builtin.command:
+        cmd: dnf copr list | grep scottames/ghostty
+      register: ghostty_copr_check
+      failed_when: false
+      changed_when: false
+      when: install_ghostty | bool
+
+    - name: Enable Ghostty COPR
+      ansible.builtin.command:
+        cmd: dnf copr enable scottames/ghostty -y
+      when:
+        - install_ghostty | bool
+        - ghostty_copr_check.rc != 0
+
+    # =========================================================================
+    # Enable COPR for choose
+    # =========================================================================
+
+    - name: Check if choose COPR is enabled
+      ansible.builtin.command:
+        cmd: dnf copr list | grep atim/choose
+      register: choose_copr_check
+      failed_when: false
+      changed_when: false
+      when: install_choose | bool
+
+    - name: Enable choose COPR
+      ansible.builtin.command:
+        cmd: dnf copr enable atim/choose -y
+      when:
+        - install_choose | bool
+        - choose_copr_check.rc != 0
+
+    # =========================================================================
+    # DNF Packages
+    # =========================================================================
+
+    - name: Install helix
+      ansible.builtin.dnf:
+        name: helix
+        state: present
+      when: install_helix | bool
+
+    - name: Install bat
+      ansible.builtin.dnf:
+        name: bat
+        state: present
+      when: install_bat | bool
+
+    - name: Install git-delta
+      ansible.builtin.dnf:
+        name: git-delta
+        state: present
+      when: install_git_delta | bool
+
+    - name: Install duf
+      ansible.builtin.dnf:
+        name: duf
+        state: present
+      when: install_duf | bool
+
+    - name: Install fd-find
+      ansible.builtin.dnf:
+        name: fd-find
+        state: present
+      when: install_fd | bool
+
+    - name: Install ripgrep
+      ansible.builtin.dnf:
+        name: ripgrep
+        state: present
+      when: install_ripgrep | bool
+
+    - name: Install hyperfine
+      ansible.builtin.dnf:
+        name: hyperfine
+        state: present
+      when: install_hyperfine | bool
+
+    - name: Install procs
+      ansible.builtin.dnf:
+        name: procs
+        state: present
+      when: install_procs | bool
+
+    - name: Install httpie
+      ansible.builtin.dnf:
+        name: httpie
+        state: present
+      when: install_httpie | bool
+
+    - name: Install mosh
+      ansible.builtin.dnf:
+        name: mosh
+        state: present
+      when: install_mosh | bool
+
+    - name: Install plocate
+      ansible.builtin.dnf:
+        name: plocate
+        state: present
+      when: install_plocate | bool
+
+    - name: Install hexyl
+      ansible.builtin.dnf:
+        name: hexyl
+        state: present
+      when: install_hexyl | bool
+
+    - name: Install tealdeer
+      ansible.builtin.dnf:
+        name: tealdeer
+        state: present
+      when: install_tealdeer | bool
+
+    - name: Install python3-dnf-plugin-versionlock
+      ansible.builtin.dnf:
+        name: python3-dnf-plugin-versionlock
+        state: present
+      when: install_versionlock | bool
+
+    - name: Install ghostty
+      ansible.builtin.dnf:
+        name: ghostty
+        state: present
+      when: install_ghostty | bool
+
+    - name: Install eza
+      ansible.builtin.dnf:
+        name: eza
+        state: present
+      when: install_eza | bool
+
+    - name: Install difftastic
+      ansible.builtin.dnf:
+        name: difftastic
+        state: present
+      when: install_difftastic | bool
+
+    - name: Install choose
+      ansible.builtin.dnf:
+        name: choose
+        state: present
+      when: install_choose | bool
+
+    - name: Install podman-docker
+      ansible.builtin.dnf:
+        name: podman-docker
+        state: present
+      when: install_podman_docker | bool
+
+    - name: Install podman-compose
+      ansible.builtin.dnf:
+        name: podman-compose
+        state: present
+      when: install_podman_compose | bool
+
+    # =========================================================================
+    # Summary
+    # =========================================================================
+
+    - name: Display installation summary
+      ansible.builtin.debug:
+        msg: "DNF packages installation complete!"

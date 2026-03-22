@@ -1,0 +1,86 @@
+---
+# ansible/inventory.yml
+# Configuration file for package installation
+# Usage: ansible-playbook main.yml -i inventory.yml --become
+#
+# Set any variable to false to skip that package
+
+all:
+  vars:
+    # =======================================================================
+    # main.yml - Core Tools
+    # =======================================================================
+    install_git: true
+    install_stow: true
+    install_curl: true
+    install_wget: true
+    install_uv: true
+    install_brew: true
+    install_bash_completion: true
+
+    # =======================================================================
+    # other.yml - curl|sh tools
+    # =======================================================================
+    install_mise: true
+    install_uv: true
+    install_lazygit: true
+    install_lazydocker: true
+    install_dust: true
+    install_zoxide: true
+    install_direnv: true
+    install_croc: true
+    install_xh: true
+    install_dog: true
+    install_fx: true
+    install_cheat: true
+    install_lnav: true
+    install_angle_grinder: true
+    install_atuin: true
+    install_distrobox: true
+    install_minikube: true
+    install_zed: true
+    install_soar: true
+    install_claude: true
+    install_opencode: true
+    install_pnpm: true
+    install_glances: true
+    install_curlie: true
+    install_fnm: true
+    install_yq: true
+    install_dockly: true
+
+    # uvx tools
+    install_jc: true
+    install_pgcli: true
+
+    # cargo tools (none - all moved to dnf/brew)
+
+    # brew tools
+    install_glow: true
+    install_sd: true
+    install_yazi: true
+    install_magic_wormhole: true
+    install_k9s: true
+    install_gron: true
+    install_fzf: true
+
+    # =======================================================================
+    # dnf.yml - DNF-specific packages
+    # =======================================================================
+    install_helix: true
+    install_bat: true
+    install_git_delta: true
+    install_duf: true
+    install_fd: true
+    install_ripgrep: true
+    install_hyperfine: true
+    install_procs: true
+    install_httpie: true
+    install_mosh: true
+    install_plocate: true
+    install_hexyl: true
+    install_tealdeer: true
+    install_versionlock: true
+    install_ghostty: true
+    install_podman_docker: true
+    install_podman_compose: true

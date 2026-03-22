@@ -1,0 +1,804 @@
+---
+# other.yml - Tools installed via curl|sh, uvx, brew
+# Usage: ansible-playbook other.yml --become
+# Tags: other, curl, uvx, brew, all
+
+- name: Install other developer tools
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  become: true
+
+  environment:
+    PATH: "{{ lookup('env', 'HOME') }}/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+
+  vars:
+    # Package selection - set to false to skip
+    # curl|sh tools
+    install_uv: true
+    install_mise: true
+    install_lazygit: true
+    install_lazydocker: true
+    install_dust: true
+    install_zoxide: true
+    install_direnv: true
+    install_croc: true
+    install_xh: true
+    install_dog: true
+    install_fx: true
+    install_cheat: true
+    install_lnav: true
+    install_angle_grinder: true
+    install_atuin: true
+    install_distrobox: true
+    install_minikube: true
+    install_zed: true
+    install_soar: true
+    install_claude: true
+    install_opencode: true
+    install_pnpm: true
+    install_glances: true
+    install_curlie: true
+    install_fnm: true
+
+    # uv tools (installed via uv tool install)
+    install_jc: true
+    install_pgcli: true
+
+    # (none - all moved to dnf/brew)
+
+    # brew tools
+    install_glow: true
+    install_broot: true
+    install_sd: true
+    install_yazi: true
+    install_magic_wormhole: true
+    install_k9s: true
+    install_gron: true
+    install_fzf: true
+    install_yq: true
+    install_dockly: true
+
+    # Tool install paths
+    local_bin_path: "{{ lookup('env', 'HOME') }}/.local/bin"
+
+  tags:
+    - other
+    - curl
+    - uvx
+    - brew
+    - all
+
+  tasks:
+    # =========================================================================
+    # Ensure directories exist
+    # =========================================================================
+
+    - name: Ensure .local/bin exists
+      ansible.builtin.file:
+        path: "{{ local_bin_path }}"
+        state: directory
+        mode: '0755'
+
+    - name: Add .local/bin to PATH for checks
+      ansible.builtin.set_fact:
+        ansible_python_executable: "{{ ansible_python_executable | default('python3') }}"
+      changed_when: false
+
+    # =========================================================================
+    # curl|sh Installation Methods
+    # =========================================================================
+
+    # --- mise ---
+    - name: Check if mise is installed
+      ansible.builtin.command:
+        cmd: which mise
+      register: mise_check
+      failed_when: false
+      changed_when: false
+      when: install_mise | bool
+
+    - name: Install mise
+      ansible.builtin.shell:
+        cmd: curl -fsSL https://mise.run | sh
+      when:
+        - install_mise | bool
+        - mise_check.rc != 0
+
+    # --- uv ---
+    - name: Check if uv is installed
+      ansible.builtin.command:
+        cmd: which uv
+      register: uv_check
+      failed_when: false
+      changed_when: false
+      when: install_uv | bool
+
+    - name: Install uv
+      ansible.builtin.shell:
+        cmd: curl -LsSf https://astral.sh/uv/install.sh | sh
+      when:
+        - install_uv | bool
+        - uv_check.rc != 0
+
+    - name: Add uv to PATH (bash)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.bashrc"
+        line: 'export PATH="$HOME/.local/bin:$PATH"'
+        create: true
+      when: install_uv | bool
+
+    - name: Add uv to PATH (fish)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.config/fish/config.fish"
+        line: 'fish_add_path -g "$HOME/.local/bin"'
+        create: true
+      when: install_uv | bool
+
+    # --- lazygit ---
+    - name: Check if lazygit is installed
+      ansible.builtin.command:
+        cmd: which lazygit
+      register: lazygit_check
+      failed_when: false
+      changed_when: false
+      when: install_lazygit | bool
+
+    - name: Install lazygit
+      ansible.builtin.shell:
+        cmd: curl -sSfL https://raw.githubusercontent.com/jesseduffield/lazygit/master/scripts/install_update_linux.sh | bash
+      when:
+        - install_lazygit | bool
+        - lazygit_check.rc != 0
+
+    # --- lazydocker ---
+    - name: Check if lazydocker is installed
+      ansible.builtin.command:
+        cmd: which lazydocker
+      register: lazydocker_check
+      failed_when: false
+      changed_when: false
+      when: install_lazydocker | bool
+
+    - name: Install lazydocker
+      ansible.builtin.shell:
+        cmd: curl -sSfL https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+      when:
+        - install_lazydocker | bool
+        - lazydocker_check.rc != 0
+
+    # --- dust ---
+    - name: Check if dust is installed
+      ansible.builtin.command:
+        cmd: which dust
+      register: dust_check
+      failed_when: false
+      changed_when: false
+      when: install_dust | bool
+
+    - name: Install dust
+      ansible.builtin.shell:
+        cmd: curl -sfL https://raw.githubusercontent.com/bootandy/dust/master/install.sh | sh
+      when:
+        - install_dust | bool
+        - dust_check.rc != 0
+
+    # --- zoxide ---
+    - name: Check if zoxide is installed
+      ansible.builtin.command:
+        cmd: which zoxide
+      register: zoxide_check
+      failed_when: false
+      changed_when: false
+      when: install_zoxide | bool
+
+    - name: Install zoxide
+      ansible.builtin.shell:
+        cmd: curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+      when:
+        - install_zoxide | bool
+        - zoxide_check.rc != 0
+
+    # --- direnv ---
+    - name: Check if direnv is installed
+      ansible.builtin.command:
+        cmd: which direnv
+      register: direnv_check
+      failed_when: false
+      changed_when: false
+      when: install_direnv | bool
+
+    - name: Install direnv
+      ansible.builtin.shell:
+        cmd: curl -sfL https://direnv.net/install.sh | bash
+      when:
+        - install_direnv | bool
+        - direnv_check.rc != 0
+
+    # --- croc ---
+    - name: Check if croc is installed
+      ansible.builtin.command:
+        cmd: which croc
+      register: croc_check
+      failed_when: false
+      changed_when: false
+      when: install_croc | bool
+
+    - name: Install croc
+      ansible.builtin.shell:
+        cmd: curl https://getcroc.schollz.com | bash
+      when:
+        - install_croc | bool
+        - croc_check.rc != 0
+
+    # --- xh ---
+    - name: Check if xh is installed
+      ansible.builtin.command:
+        cmd: which xh
+      register: xh_check
+      failed_when: false
+      changed_when: false
+      when: install_xh | bool
+
+    - name: Install xh
+      ansible.builtin.shell:
+        cmd: curl -sfL https://raw.githubusercontent.com/ducaale/xh/master/install.sh | sh
+      when:
+        - install_xh | bool
+        - xh_check.rc != 0
+
+    # --- dog (dns) ---
+    - name: Check if dog is installed
+      ansible.builtin.command:
+        cmd: which dog
+      register: dog_check
+      failed_when: false
+      changed_when: false
+      when: install_dog | bool
+
+    - name: Install dog
+      ansible.builtin.shell:
+        cmd: curl -fsSL https://raw.githubusercontent.com/ogham/dog/master/install.sh | sh
+      when:
+        - install_dog | bool
+        - dog_check.rc != 0
+
+    # --- fx ---
+    - name: Check if fx is installed
+      ansible.builtin.command:
+        cmd: which fx
+      register: fx_check
+      failed_when: false
+      changed_when: false
+      when: install_fx | bool
+
+    - name: Install fx
+      ansible.builtin.shell:
+        cmd: curl -fsSL https://fx.wtf/install.sh | sh
+      when:
+        - install_fx | bool
+        - fx_check.rc != 0
+
+    # --- cheat ---
+    - name: Check if cheat is installed
+      ansible.builtin.command:
+        cmd: which cheat
+      register: cheat_check
+      failed_when: false
+      changed_when: false
+      when: install_cheat | bool
+
+    - name: Install cheat
+      ansible.builtin.shell:
+        cmd: |
+          cd /tmp
+          wget -q https://github.com/cheat/cheat/releases/download/5.0.0/cheat-linux-amd64.gz
+          gunzip -f cheat-linux-amd64.gz
+          chmod +x cheat-linux-amd64
+          mv cheat-linux-amd64 {{ local_bin_path }}/cheat
+      when:
+        - install_cheat | bool
+        - cheat_check.rc != 0
+
+    # --- lnav ---
+    - name: Check if lnav is installed
+      ansible.builtin.command:
+        cmd: which lnav
+      register: lnav_check
+      failed_when: false
+      changed_when: false
+      when: install_lnav | bool
+
+    - name: Install lnav
+      ansible.builtin.shell:
+        cmd: curl -sS https://webinstall.dev/lnav | bash
+      when:
+        - install_lnav | bool
+        - lnav_check.rc != 0
+
+    # --- angle-grinder ---
+    - name: Check if ang is installed
+      ansible.builtin.command:
+        cmd: which ang
+      register: ang_check
+      failed_when: false
+      changed_when: false
+      when: install_angle_grinder | bool
+
+
+    # --- atuin ---
+    - name: Check if atuin is installed
+      ansible.builtin.command:
+        cmd: which atuin
+      register: atuin_check
+      failed_when: false
+      changed_when: false
+      when: install_atuin | bool
+
+    - name: Install atuin
+      ansible.builtin.shell:
+        cmd: curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+      when:
+        - install_atuin | bool
+        - atuin_check.rc != 0
+
+    # --- distrobox ---
+    - name: Check if distrobox is installed
+      ansible.builtin.command:
+        cmd: which distrobox
+      register: distrobox_check
+      failed_when: false
+      changed_when: false
+      when: install_distrobox | bool
+
+    - name: Install distrobox
+      ansible.builtin.shell:
+        cmd: curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh
+      when:
+        - install_distrobox | bool
+        - distrobox_check.rc != 0
+
+    # --- minikube ---
+    - name: Check if minikube is installed
+      ansible.builtin.command:
+        cmd: which minikube
+      register: minikube_check
+      failed_when: false
+      changed_when: false
+      when: install_minikube | bool
+
+    - name: Install minikube
+      ansible.builtin.shell:
+        cmd: |
+          curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+          sudo rpm -Uvh minikube-latest.x86_64.rpm
+          rm -f minikube-latest.x86_64.rpm
+      when:
+        - install_minikube | bool
+        - minikube_check.rc != 0
+
+    # --- zed ---
+    - name: Check if zed is installed
+      ansible.builtin.command:
+        cmd: which zed
+      register: zed_check
+      failed_when: false
+      changed_when: false
+      when: install_zed | bool
+
+    - name: Install zed
+      ansible.builtin.shell:
+        cmd: curl -f https://zed.dev/install.sh | sh
+      when:
+        - install_zed | bool
+        - zed_check.rc != 0
+
+    # --- soar ---
+    - name: Check if soar is installed
+      ansible.builtin.command:
+        cmd: which soar
+      register: soar_check
+      failed_when: false
+      changed_when: false
+      when: install_soar | bool
+
+    - name: Install soar
+      ansible.builtin.shell:
+        cmd: curl -fsSL https://raw.githubusercontent.com/pkgforge/soar/main/install.sh | sh
+      when:
+        - install_soar | bool
+        - soar_check.rc != 0
+
+    # --- claude ---
+    - name: Check if claude is installed
+      ansible.builtin.command:
+        cmd: which claude
+      register: claude_check
+      failed_when: false
+      changed_when: false
+      when: install_claude | bool
+
+    - name: Install claude
+      ansible.builtin.shell:
+        cmd: curl -fsSL https://claude.ai/install.sh | bash
+      when:
+        - install_claude | bool
+        - claude_check.rc != 0
+
+    # --- opencode ---
+    - name: Check if opencode is installed
+      ansible.builtin.command:
+        cmd: which opencode
+      register: opencode_check
+      failed_when: false
+      changed_when: false
+      when: install_opencode | bool
+
+    - name: Install opencode
+      ansible.builtin.shell:
+        cmd: curl -fsSL https://opencode.ai/install | bash
+        creates: "{{ lookup('env', 'HOME') }}/.opencode/bin/opencode"
+      when:
+        - install_opencode | bool
+        - opencode_check.rc != 0
+
+    # --- pnpm ---
+    - name: Check if pnpm is installed
+      ansible.builtin.command:
+        cmd: which pnpm
+      register: pnpm_check
+      failed_when: false
+      changed_when: false
+      when: install_pnpm | bool
+
+    - name: Install pnpm
+      ansible.builtin.shell:
+        cmd: curl -fsSL https://get.pnpm.io/install.sh | sh -
+        creates: "{{ lookup('env', 'HOME') }}/.local/share/pnpm/pnpm"
+      when:
+        - install_pnpm | bool
+        - pnpm_check.rc != 0
+
+    # --- glances (via uvx) ---
+    - name: Check if glances is installed
+      ansible.builtin.command:
+        cmd: which glances
+      register: glances_check
+      failed_when: false
+      changed_when: false
+      when: install_glances | bool
+
+    - name: Install glances (via uv)
+      ansible.builtin.shell:
+        cmd: uv tool install glances
+      when:
+        - install_glances | bool
+        - glances_check.rc != 0
+
+    # --- curlie ---
+    - name: Check if curlie is installed
+      ansible.builtin.command:
+        cmd: which curlie
+      register: curlie_check
+      failed_when: false
+      changed_when: false
+      when: install_curlie | bool
+
+    - name: Install curlie
+      ansible.builtin.shell:
+        cmd: curl -sS https://webinstall.dev/curlie | bash
+        creates: "{{ lookup('env', 'HOME') }}/.local/bin/curlie"
+      when:
+        - install_curlie | bool
+        - curlie_check.rc != 0
+
+    # --- fnm ---
+    - name: Check if fnm is installed
+      ansible.builtin.command:
+        cmd: which fnm
+      register: fnm_check
+      failed_when: false
+      changed_when: false
+      when: install_fnm | bool
+
+    - name: Install fnm
+      ansible.builtin.shell:
+        cmd: curl -o- https://fnm.vercel.app/install | bash
+      when:
+        - install_fnm | bool
+        - fnm_check.rc != 0
+
+    - name: Add fnm to PATH (bash)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.bashrc"
+        line: 'export PATH="$HOME/.local/share/fnm:$PATH"'
+        create: true
+      when: install_fnm | bool
+
+    - name: Add fnm to PATH (fish)
+      ansible.builtin.lineinfile:
+        path: "{{ lookup('env', 'HOME') }}/.config/fish/config.fish"
+        line: 'fish_add_path -g "$HOME/.local/share/fnm"'
+        create: true
+      when: install_fnm | bool
+
+    # =========================================================================
+    # uv Installation Methods (installed via uv tool install)
+    # =========================================================================
+
+    # --- jc ---
+    - name: Check if jc is installed
+      ansible.builtin.command:
+        cmd: which jc
+      register: jc_check
+      failed_when: false
+      changed_when: false
+      when: install_jc | bool
+
+    - name: Install jc (via uv)
+      ansible.builtin.shell:
+        cmd: uv tool install jc
+      when:
+        - install_jc | bool
+        - jc_check.rc != 0
+
+    # --- pgcli ---
+    - name: Check if pgcli is installed
+      ansible.builtin.command:
+        cmd: which pgcli
+      register: pgcli_check
+      failed_when: false
+      changed_when: false
+      when: install_pgcli | bool
+
+    - name: Install pgcli (via uv)
+      ansible.builtin.shell:
+        cmd: uv tool install pgcli
+      when:
+        - install_pgcli | bool
+        - pgcli_check.rc != 0
+
+    # =========================================================================
+    # cargo Installation Methods (none - all moved to dnf/brew)
+    # =========================================================================
+
+    # =========================================================================
+    # Homebrew Installation Methods (if brew is available)
+    # =========================================================================
+
+    - name: Check if brew is available
+      ansible.builtin.command:
+        cmd: which brew
+      register: brew_check
+      failed_when: false
+      changed_when: false
+
+    # --- glow ---
+    - name: Check if glow is installed
+      ansible.builtin.command:
+        cmd: which glow
+      register: glow_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_glow | bool
+        - brew_check.rc == 0
+
+    - name: Install glow (brew)
+      community.general.homebrew:
+        name: glow
+        state: present
+      when:
+        - install_glow | bool
+        - brew_check.rc == 0
+        - glow_check.rc != 0
+
+    # --- broot ---
+    - name: Check if broot is installed
+      ansible.builtin.command:
+        cmd: which broot
+      register: broot_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_broot | bool
+        - brew_check.rc == 0
+
+    - name: Install broot (brew)
+      community.general.homebrew:
+        name: broot
+        state: present
+      when:
+        - install_broot | bool
+        - brew_check.rc == 0
+        - broot_check.rc != 0
+
+    # --- sd ---
+    - name: Check if sd is installed
+      ansible.builtin.command:
+        cmd: which sd
+      register: sd_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_sd | bool
+        - brew_check.rc == 0
+
+    - name: Install sd (brew)
+      community.general.homebrew:
+        name: sd
+        state: present
+      when:
+        - install_sd | bool
+        - brew_check.rc == 0
+        - sd_check.rc != 0
+
+    # --- yazi ---
+    - name: Check if yazi is installed
+      ansible.builtin.command:
+        cmd: which yazi
+      register: yazi_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_yazi | bool
+        - brew_check.rc == 0
+
+    - name: Install yazi (brew)
+      community.general.homebrew:
+        name: yazi
+        state: present
+      when:
+        - install_yazi | bool
+        - brew_check.rc == 0
+        - yazi_check.rc != 0
+
+    # --- magic-wormhole ---
+    - name: Check if wormhole is installed
+      ansible.builtin.command:
+        cmd: which wormhole
+      register: wormhole_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_magic_wormhole | bool
+        - brew_check.rc == 0
+
+    - name: Install magic-wormhole (brew)
+      community.general.homebrew:
+        name: magic-wormhole
+        state: present
+      when:
+        - install_magic_wormhole | bool
+        - brew_check.rc == 0
+        - wormhole_check.rc != 0
+
+    # --- k9s ---
+    - name: Check if k9s is installed
+      ansible.builtin.command:
+        cmd: which k9s
+      register: k9s_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_k9s | bool
+        - brew_check.rc == 0
+
+    - name: Install k9s (brew)
+      community.general.homebrew:
+        name: derailed/k9s/k9s
+        state: present
+      when:
+        - install_k9s | bool
+        - brew_check.rc == 0
+        - k9s_check.rc != 0
+
+    # --- gron ---
+    - name: Check if gron is installed
+      ansible.builtin.command:
+        cmd: which gron
+      register: gron_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_gron | bool
+        - brew_check.rc == 0
+
+    - name: Install gron (brew)
+      community.general.homebrew:
+        name: gron
+        state: present
+      when:
+        - install_gron | bool
+        - brew_check.rc == 0
+        - gron_check.rc != 0
+
+    # --- fzf ---
+    - name: Check if fzf is installed
+      ansible.builtin.command:
+        cmd: which fzf
+      register: fzf_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_fzf | bool
+        - brew_check.rc == 0
+
+    - name: Install fzf (brew)
+      community.general.homebrew:
+        name: fzf
+        state: present
+      when:
+        - install_fzf | bool
+        - brew_check.rc == 0
+        - fzf_check.rc != 0
+
+    # --- yq ---
+    - name: Check if yq is installed
+      ansible.builtin.command:
+        cmd: which yq
+      register: yq_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_yq | bool
+        - brew_check.rc == 0
+
+    - name: Install yq (brew)
+      community.general.homebrew:
+        name: yq
+        state: present
+      when:
+        - install_yq | bool
+        - brew_check.rc == 0
+        - yq_check.rc != 0
+
+    # --- dockly ---
+    - name: Check if dockly is installed
+      ansible.builtin.command:
+        cmd: which dockly
+      register: dockly_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_dockly | bool
+        - brew_check.rc == 0
+
+    - name: Install dockly (brew)
+      community.general.homebrew:
+        name: dockly
+        state: present
+      when:
+        - install_dockly | bool
+        - brew_check.rc == 0
+        - dockly_check.rc != 0
+
+    # --- angle-grinder ---
+    - name: Check if ang is installed
+      ansible.builtin.command:
+        cmd: which ang
+      register: ang_check
+      failed_when: false
+      changed_when: false
+      when:
+        - install_angle_grinder | bool
+        - brew_check.rc == 0
+
+    - name: Install angle-grinder (brew)
+      community.general.homebrew:
+        name: angle-grinder
+        state: present
+      when:
+        - install_angle_grinder | bool
+        - brew_check.rc == 0
+        - ang_check.rc != 0
+
+    # =========================================================================
+    # Summary
+    # =========================================================================
+
+    - name: Display installation summary
+      ansible.builtin.debug:
+        msg:
+          - "Other tools installation complete!"
+          - "Run 'ansible-playbook dnf.yml --become' for DNF-specific packages (Fedora/RHEL)"

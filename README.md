@@ -16,6 +16,11 @@ Modern, cross-platform dotfiles for developers. Supports Linux distributions (Fe
 ## 🚀 Quick Start
 
 ```bash
+# Install Neovim first (required for LazyVim)
+# Fedora: sudo dnf install neovim
+# Ubuntu: sudo apt install neovim
+# Arch: sudo pacman -S neovim
+
 # Clone repository
 git clone <your-repo-url> ~/.dotfiles
 cd ~/.dotfiles
@@ -23,7 +28,7 @@ cd ~/.dotfiles
 # Bootstrap (install dependencies)
 ./scripts/bootstrap.sh
 
-# Install dotfiles (stow configs)
+# Install dotfiles (stow configs + LazyVim plugins)
 ./scripts/install.sh
 
 # Check what's installed
@@ -41,6 +46,8 @@ cd ~/.dotfiles
 ├── helix/          # Helix editor config
 ├── lazygit/        # LazyGit TUI config
 ├── lazyvim/        # Neovim (LazyVim) config
+├── niri/           # Niri compositor (Wayland)
+├── noctalia/       # Noctalia shell (Wayland)
 ├── starship/       # Starship prompt config
 ├── themes/         # Centralized theme system (coming soon)
 ├── vscode/         # VS Code config
@@ -56,10 +63,14 @@ cd ~/.dotfiles
 - `git` - Version control
 - `stow` - Symlink manager
 - `curl` / `wget` - Download tools
+- `nvim` - Neovim (install before running install.sh for LazyVim support)
 
 ### Shell & Prompt
 - `fish` - Modern shell
 - `starship` - Cross-shell prompt
+
+### Editor
+- `nvim` - Neovim (LazyVim) - Install before running install.sh
 
 ### Modern CLI Tools
 - `eza` - Better ls

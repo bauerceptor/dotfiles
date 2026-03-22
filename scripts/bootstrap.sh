@@ -12,14 +12,17 @@ echo ""
 if command -v dnf &>/dev/null; then
     PKG_MGR="dnf"
     PKG_INSTALL="sudo dnf install -y"
+    PKG_EXISTS="rpm -q"
     DISTRO="Fedora/RHEL"
 elif command -v apt &>/dev/null; then
     PKG_MGR="apt"
     PKG_INSTALL="sudo apt install -y"
+    PKG_EXISTS="dpkg -l"
     DISTRO="Debian/Ubuntu"
 elif command -v pacman &>/dev/null; then
     PKG_MGR="pacman"
     PKG_INSTALL="sudo pacman -S --noconfirm"
+    PKG_EXISTS="pacman -Q"
     DISTRO="Arch Linux"
 else
     echo "❌ Error: No supported package manager found (dnf, apt, or pacman)"
@@ -29,13 +32,25 @@ fi
 echo "📦 Detected distribution: $DISTRO ($PKG_MGR)"
 echo ""
 
+# Function to install package only if not already installed
+install_if_missing() {
+    local pkg=$1
+    if $PKG_EXISTS "$pkg" >/dev/null 2>&1; then
+        echo "  ✓ $pkg already installed, skipping..."
+    else
+        echo "  → Installing $pkg..."
+        $PKG_INSTALL "$pkg"
+    fi
+}
+
 # Core dependencies
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "1️⃣  Installing core dependencies..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-CORE_DEPS="git stow curl wget"
-$PKG_INSTALL $CORE_DEPS
+for pkg in git stow curl wget; do
+    install_if_missing "$pkg"
+done
 
 # Modern CLI tools
 echo ""
@@ -47,18 +62,21 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 if [ "$PKG_MGR" = "dnf" ]; then
     CLI_TOOLS="fish eza bat fd-find ripgrep fzf zoxide starship direnv atuin \
                git-delta sd dust duf btop procs hyperfine tealdeer jq yq xh \
-               glow lazygit tokei hexyl gh"
+               glow lazygit tokei hexyl gh neovim"
 elif [ "$PKG_MGR" = "apt" ]; then
     CLI_TOOLS="fish exa bat fd-find ripgrep fzf zoxide starship direnv \
                git-delta sd dust duf btop procs hyperfine tealdeer jq yq xh \
-               glow lazygit tokei hexyl gh"
+               glow lazygit tokei hexyl gh neovim"
 elif [ "$PKG_MGR" = "pacman" ]; then
     CLI_TOOLS="fish eza bat fd ripgrep fzf zoxide starship direnv atuin \
                git-delta sd dust duf btop procs hyperfine tealdeer jq yq xh \
-               glow lazygit tokei hexyl github-cli"
+               glow lazygit tokei hexyl github-cli neovim"
 fi
 
-$PKG_INSTALL $CLI_TOOLS 2>/dev/null || echo "⚠️  Some packages may not be available, continuing..."
+# Install each tool if missing
+for pkg in $CLI_TOOLS; do
+    install_if_missing "$pkg"
+done
 
 # Fish shell setup
 echo ""
@@ -83,7 +101,7 @@ else
     echo "⊙ Keeping current default shell"
 fi
 
-# Install fonts
+# Install fonts (idempotent - skips if already installed)
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "4️⃣  Installing Nerd Fonts..."
