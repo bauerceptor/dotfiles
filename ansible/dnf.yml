@@ -26,6 +26,7 @@
     install_tealdeer: true
     install_versionlock: true
     install_ghostty: true
+    install_zellij: true
     install_eza: true
     install_difftastic: true
     install_choose: true
@@ -62,6 +63,25 @@
       when:
         - install_ghostty | bool
         - ghostty_copr_check.rc != 0
+
+    # =========================================================================
+    # Enable COPR for zellij
+    # =========================================================================
+
+    - name: Check if zellij COPR is enabled
+      ansible.builtin.command:
+        cmd: dnf copr list | grep varlad/zellij
+      register: zellij_copr_check
+      failed_when: false
+      changed_when: false
+      when: install_zellij | bool
+
+    - name: Enable zellij COPR
+      ansible.builtin.command:
+        cmd: dnf copr enable varlad/zellij -y
+      when:
+        - install_zellij | bool
+        - zellij_copr_check.rc != 0
 
     # =========================================================================
     # Enable COPR for choose
@@ -175,6 +195,12 @@
         name: ghostty
         state: present
       when: install_ghostty | bool
+
+    - name: Install zellij
+      ansible.builtin.dnf:
+        name: zellij
+        state: present
+      when: install_zellij | bool
 
     - name: Install eza
       ansible.builtin.dnf:
