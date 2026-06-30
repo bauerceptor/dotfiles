@@ -1,12 +1,12 @@
 # Dotfiles
 
-Modern, cross-platform dotfiles for developers. Supports Linux distributions (Fedora, Ubuntu, Arch) with platform-agnostic configurations.
+Modern, cross-platform dotfiles for developers. Supports Fedora and Debian/Ubuntu based distributions with platform-agnostic configurations.
 
 ## ✨ Features
 
 - 🎨 **Centralized Theme System** - One command to change colors across all tools
 - 🐧 **Platform Agnostic** - No hardcoded paths, works across Linux distros
-- 📦 **Distro Agnostic** - Universal package manager aliases (dnf/apt/pacman)
+- 📦 **Distro Agnostic** - Universal package manager aliases (dnf/apt)
 - ⚙️ **Automated Setup** - Bootstrap script handles everything
 - 🔧 **Multiple Editors** - Helix, Zed, VSCode, Neovim (LazyVim)
 - 🖥️ **Multiple Terminals** - Alacritty, Ghostty
@@ -19,8 +19,6 @@ Modern, cross-platform dotfiles for developers. Supports Linux distributions (Fe
 # Install Neovim first (required for LazyVim)
 # Fedora: sudo dnf install neovim
 # Ubuntu: sudo apt install neovim
-# Arch: sudo pacman -S neovim
-
 # Clone repository
 git clone <your-repo-url> ~/.dotfiles
 cd ~/.dotfiles
@@ -41,16 +39,21 @@ cd ~/.dotfiles
 ~/.dotfiles/
 ├── alacritty/      # Alacritty terminal config
 ├── bash/           # Bash shell config
+├── distrobox/      # Distrobox container defaults
+├── dolphin/        # Dolphin file manager config
 ├── fish/           # Fish shell config + plugins
+├── fuzzel/         # Fuzzel launcher config
 ├── ghostty/        # Ghostty terminal config
 ├── helix/          # Helix editor config
+├── kate/           # Kate editor config
+├── konsole/        # Konsole terminal config
 ├── lazygit/        # LazyGit TUI config
 ├── lazyvim/        # Neovim (LazyVim) config
-├── niri/           # Niri compositor (Wayland)
 ├── noctalia/       # Noctalia shell (Wayland)
+├── rofi/           # Rofi launcher config
 ├── starship/       # Starship prompt config
 ├── themes/         # Centralized theme system (coming soon)
-├── vscode/         # VS Code config
+├── vscode/         # VS Code/VSCodium config
 ├── yazi/           # Yazi file manager config
 ├── zed/            # Zed editor config
 ├── scripts/        # Installation and utility scripts
@@ -85,10 +88,12 @@ cd ~/.dotfiles
 ### Optional Tools
 - `atuin` - Shell history
 - `direnv` - Per-directory env
+- `distrobox` - Run different distros in containers
 - `dust` - Better du
 - `duf` - Better df
 - `btop` - Better top
 - `procs` - Better ps
+- `zellij` - Terminal multiplexer
 
 See [docs/INSTALLATION.md](docs/INSTALLATION.md) for detailed requirements by distro.
 
@@ -125,8 +130,8 @@ Theme system coming soon! Will support:
 |----------|--------|-------|
 | Fedora   | ✅ Full | Primary development platform |
 | Ubuntu/Debian | ✅ Full | Tested and supported |
-| Arch Linux | ✅ Full | Package manager abstraction |
-| macOS | ⚠️ Partial | Homebrew paths supported |
+| Arch Linux | ❌ Unsupported | Removed to keep scripts maintainable |
+| macOS | ⚠️ Partial | Homebrew paths supported but not actively maintained |
 | WSL | ⚠️ Partial | Linux tools should work |
 
 ## 🛠️ Customization
