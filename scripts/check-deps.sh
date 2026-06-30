@@ -1,130 +1,61 @@
 #!/bin/bash
-# check-deps.sh - Verify required tools are installed
+# check-deps.sh - Verify installed dependencies
 
-echo "🔍 Checking Dependencies"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
+set -euo pipefail
 
-# Core tools
-CORE_TOOLS=(
-    "git"
-    "stow"
-    "curl"
-    "wget"
-)
-
-# Modern CLI tools
-CLI_TOOLS=(
-    "fish"
-    "eza"
-    "bat"
-    "fd"
-    "rg"
-    "fzf"
-    "zoxide"
-    "starship"
-    "direnv"
-    "atuin"
-    "delta"
-    "sd"
-    "dust"
-    "duf"
-    "btop"
-    "procs"
-    "hyperfine"
-    "tldr"
-    "jq"
-    "yq"
-    "xh"
-    "glow"
-    "lazygit"
-    "tokei"
-    "hexyl"
-    "gh"
-)
-
-# Editors
-EDITORS=(
-    "nvim"
-    "helix"
-    "zed"
-    "code"
-)
-
-check_command() {
-    local cmd=$1
-    if command -v "$cmd" &>/dev/null; then
-        echo "✓ $cmd"
+check_binary() {
+    local name=$1
+    local binary=${2:-$1}
+    if command -v "$binary" &>/dev/null; then
+        echo "  ✓ $name"
         return 0
     else
-        echo "✗ $cmd (missing)"
+        echo "  ✗ $name"
         return 1
     fi
 }
 
-# Check core tools
-echo "Core Tools:"
-echo "───────────"
-MISSING_CORE=0
-for tool in "${CORE_TOOLS[@]}"; do
-    check_command "$tool" || ((MISSING_CORE++))
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🔍 Checking dependencies"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+echo "Core tools:"
+CORE_OK=true
+for tool in git stow curl wget unzip fc-list fc-cache; do
+    check_binary "$tool" || CORE_OK=false
 done
 
 echo ""
-echo "Modern CLI Tools:"
-echo "─────────────────"
-MISSING_CLI=0
-for tool in "${CLI_TOOLS[@]}"; do
-    check_command "$tool" || ((MISSING_CLI++))
+echo "Modern CLI tools:"
+CLI_OK=true
+for tool in fish eza bat fd rg fzf zoxide starship direnv atuin delta sd dust duf btop procs hyperfine tldr jq yq xh glow lazygit tokei hexyl gh neovim distrobox zellij; do
+    case "$tool" in
+        rg) binary="rg" ;;
+        tldr) binary="tldr" ;;
+        fd) binary="fd" ;;
+        gh) binary="gh" ;;
+        *) binary="$tool" ;;
+    esac
+    check_binary "$tool" "$binary" || CLI_OK=false
 done
 
 echo ""
 echo "Editors:"
-echo "────────"
-MISSING_EDITORS=0
-for tool in "${EDITORS[@]}"; do
-    check_command "$tool" || ((MISSING_EDITORS++))
+EDITORS_OK=true
+for tool in nvim helix zed code codium; do
+    check_binary "$tool" || EDITORS_OK=false
 done
 
-# Summary
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "Summary:"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-
-TOTAL_MISSING=$((MISSING_CORE + MISSING_CLI + MISSING_EDITORS))
-
-if [ $MISSING_CORE -gt 0 ]; then
-    echo "❌ Missing $MISSING_CORE core tool(s)"
-    echo "   Run: ./scripts/bootstrap.sh"
-else
-    echo "✅ All core tools installed"
-fi
-
-if [ $MISSING_CLI -gt 0 ]; then
-    echo "⚠️  Missing $MISSING_CLI CLI tool(s) (optional)"
-else
-    echo "✅ All CLI tools installed"
-fi
-
-if [ $MISSING_EDITORS -gt 0 ]; then
-    echo "⊙ Missing $MISSING_EDITORS editor(s) (optional)"
-else
-    echo "✅ All editors installed"
-fi
-
-echo ""
-
-if [ $TOTAL_MISSING -eq 0 ]; then
-    echo "🎉 All dependencies satisfied!"
+if [ "$CORE_OK" = false ]; then
+    echo "❌ Core tools missing. Run ./scripts/bootstrap.sh"
+    exit 1
+elif [ "$CLI_OK" = false ] || [ "$EDITORS_OK" = false ]; then
+    echo "⚠️  Some optional tools/editors missing. Run ./scripts/bootstrap.sh"
     exit 0
 else
-    echo "📝 Total missing: $TOTAL_MISSING"
-    if [ $MISSING_CORE -gt 0 ]; then
-        echo "   ⚠️  Missing core dependencies! Run bootstrap.sh"
-        exit 1
-    else
-        echo "   ℹ️  Missing optional tools"
-        exit 0
-    fi
+    echo "✅ All dependencies present!"
+    exit 0
 fi
