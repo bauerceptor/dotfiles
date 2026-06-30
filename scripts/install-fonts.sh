@@ -1,79 +1,69 @@
 #!/bin/bash
-# ~/.dotfiles/scripts/install-fonts.sh
+# install-fonts.sh - Install only JetBrainsMono and Lilex Nerd Fonts
 
-set -e
+set -euo pipefail
 
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 FONT_DIR="$HOME/.local/share/fonts"
-NERD_FONTS_VERSION="v3.1.1"
-NERD_FONTS_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONTS_VERSION}"
+NERD_FONTS_VERSION="3.1.1"
 
-# Check if fonts are already installed
-check_fonts_installed() {
-    local font_name=$1
-    if fc-list | grep -qi "$font_name"; then
-        return 0  # Already installed
-    fi
-    return 1  # Not installed
+mkdir -p "$FONT_DIR"
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🔤 Installing Nerd Fonts"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+font_exists() {
+    local pattern=$1
+    fc-list | grep -i "$pattern" >/dev/null 2>&1
 }
 
-echo "🔤 Installing Nerd Fonts..."
+install_font_from_zip() {
+    local name=$1
+    local zip_file=$2
 
-# Create fonts directory
-mkdir -p "$FONT_DIR"
-cd "$FONT_DIR"
+    echo "→ Installing $name from local zip..."
+    unzip -q -o "$zip_file" -d "$FONT_DIR"
+}
 
-# Function to download and install a font (only if not already installed)
+install_font_from_github() {
+    local name=$1
+    local url="https://github.com/ryanoasis/nerd-fonts/releases/download/v${NERD_FONTS_VERSION}/${name}.zip"
+
+    echo "→ Downloading $name..."
+    wget -q "$url" -O "/tmp/${name}.zip"
+    unzip -q -o "/tmp/${name}.zip" -d "$FONT_DIR"
+    rm -f "/tmp/${name}.zip"
+}
+
 install_font() {
-    local font_name=$1
-    local font_variant=$2  # e.g., "JetBrains Mono" for "JetBrainsMonoNerdFont"
+    local display_name=$1
+    local nerd_name=$2
+    local local_zip
+    local_zip=$(find "$REPO_ROOT" -maxdepth 1 -iname "${nerd_name}*.zip" | head -n1)
 
-    # Check if already installed
-    if [ -n "$font_variant" ] && check_fonts_installed "$font_variant"; then
-        echo "  ✓ ${font_name} already installed, skipping..."
+    if font_exists "$display_name"; then
+        echo "✓ $display_name already installed, skipping..."
         return
     fi
 
-    local zip_file="${font_name}.zip"
+    if [ -n "$local_zip" ] && [ -f "$local_zip" ]; then
+        install_font_from_zip "$display_name" "$local_zip"
+    else
+        install_font_from_github "$nerd_name"
+    fi
 
-    echo "  → Installing ${font_name}..."
-
-    # Download
-    wget -q "${NERD_FONTS_URL}/${zip_file}" -O "$zip_file"
-
-    # Extract (exclude Windows-specific files)
-    unzip -q -o "$zip_file" -x "*.txt" "*Windows*"
-
-    # Cleanup
-    rm "$zip_file"
+    echo "✓ $display_name installed"
 }
 
-# Best Nerd Fonts for development
-# (Choose 3-4 to keep it minimal)
-# Check each font before installing
+# Only install the two fonts we care about
+install_font "JetBrainsMono Nerd Font" "JetBrainsMono"
+install_font "Lilex Nerd Font" "Lilex"
 
-install_font "JetBrainsMono" "JetBrains Mono"
-install_font "FiraCode" "FiraCode"
-install_font "Hack" "Hack"
-install_font "CascadiaCode" "Cascadia Code"
-install_font "Symbols"
-
-# Optional: Uncomment if you want more variety
-# install_font "Meslo" "Meslo"
-# install_font "RobotoMono" "Roboto Mono"
-install_font "UbuntuMono" "Ubuntu Mono"
-# install_font "Inconsolata" "Inconsolata"
-
-# Refresh font cache
-echo "  → Refreshing font cache..."
-fc-cache -fv > /dev/null 2>&1
-
-echo "✅ Fonts installed successfully!"
 echo ""
-echo "Installed fonts:"
-echo "  • JetBrains Mono Nerd Font (Recommended for coding)"
-echo "  • Fira Code Nerd Font (Great ligatures)"
-echo "  • Hack Nerd Font (Clean & readable)"
-echo "  • Cascadia Code Nerd Font (Microsoft)"
+echo "→ Rebuilding font cache..."
+fc-cache -fv "$FONT_DIR" >/dev/null 2>&1
+
 echo ""
-echo "💡 Set your terminal font to one of these in Alacritty config:"
-echo "   ~/.config/alacritty/alacritty.toml"
+echo "✅ Font installation complete!"
