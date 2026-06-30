@@ -1,0 +1,18 @@
+[Desktop Entry]
+DefaultProfile=Parrot.profile
+
+[General]
+ConfigVersion=1
+
+[KonsoleWindow]
+AutoCopySelectedText=true
+RememberWindowSize=true
+ShowMenuBarByDefault=false
+
+[MainWindow]
+MenuBar=Enabled
+RestorePositionForNextInstance=true
+StatusBar=Disabled
+
+[UiSettings]
+ColorScheme=
