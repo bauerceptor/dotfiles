@@ -22,3 +22,6 @@ Thumbs.db
 
 # Local overrides
 *.local
+
+# Font archives (downloaded on demand)
+*.zip
