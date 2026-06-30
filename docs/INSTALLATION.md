@@ -4,7 +4,7 @@ Complete step-by-step guide for installing these dotfiles on your system.
 
 ## Prerequisites
 
-- A Linux distribution (Fedora, Ubuntu, Debian, Arch, or derivatives)
+- A Fedora/RHEL or Debian/Ubuntu based Linux distribution
 - `git` installed
 - Internet connection
 
@@ -39,11 +39,6 @@ sudo dnf install git
 sudo apt install git
 ```
 
-#### Arch Linux
-```bash
-sudo pacman -S git
-```
-
 ### Step 2: Clone Repository
 
 ```bash
@@ -54,10 +49,10 @@ cd ~/.dotfiles
 ### Step 3: Run Bootstrap Script
 
 The bootstrap script will:
-- Detect your Linux distribution
-- Install core dependencies (git, stow, curl, wget)
+- Detect your Linux distribution (Fedora/RHEL or Debian/Ubuntu)
+- Install core dependencies (git, stow, curl, wget, unzip, fontconfig)
 - Install modern CLI tools (eza, bat, ripgrep, etc.)
-- Install Nerd Fonts
+- Install Nerd Fonts (JetBrainsMono and Lilex only)
 - Optionally set Fish as default shell
 
 ```bash
@@ -99,6 +94,8 @@ The bootstrap script will:
 - `tokei` - Code statistics
 - `hexyl` - Hex viewer
 - `gh` - GitHub CLI
+- `distrobox` - Run different distros in containers
+- `zellij` - Terminal multiplexer
 
 ### Step 4: Install Dotfiles
 
@@ -117,6 +114,13 @@ This will:
 - `~/.bashrc` → `~/.dotfiles/bash/.bashrc`
 - `~/.config/fish/` → `~/.dotfiles/fish/.config/fish/`
 - `~/.config/alacritty/` → `~/.dotfiles/alacritty/.config/alacritty/`
+- `~/.config/kitty/` → `~/.dotfiles/kitty/.config/kitty/`
+- `~/.config/zed/` → `~/.dotfiles/zed/.config/zed/`
+- `~/.config/fuzzel/` → `~/.dotfiles/fuzzel/.config/fuzzel/`
+- `~/.config/rofi/` → `~/.dotfiles/rofi/.config/rofi/`
+- `~/.config/kate*` and `~/.config/kate/` → `~/.dotfiles/kate/.config/`
+- `~/.config/konsolerc` and `~/.local/share/konsole/` → `~/.dotfiles/konsole/`
+- `~/.config/dolphinrc` → `~/.dotfiles/dolphin/.config/`
 - And many more...
 
 ### Step 5: Post-Installation
@@ -167,13 +171,12 @@ sudo add-apt-repository ppa:fish-shell/release-3
 sudo apt update
 ```
 
-### Arch Linux
+### Distrobox Containers
 
-Arch has most modern CLI tools in official repos and AUR:
+After installation, you can create the pre-configured Fedora and Ubuntu containers:
 
 ```bash
-# Use yay for AUR packages
-yay -S <package-name>
+./scripts/distrobox-create.sh
 ```
 
 ## Troubleshooting
