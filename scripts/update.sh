@@ -1,39 +1,39 @@
 #!/bin/bash
 # update.sh - Update dotfiles and dependencies
 
-set -e
+set -euo pipefail
 
-cd "$HOME/.dotfiles"
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$REPO_ROOT"
 
-echo "🔄 Updating Dotfiles"
+echo "🔄 Updating dotfiles..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-# Pull latest changes from git
-if [ -d ".git" ]; then
-    echo "📥 Pulling latest changes..."
-    git pull
-    echo ""
+# Pull latest changes
+if git rev-parse --git-dir >/dev/null 2>&1; then
+    echo "⬇️  Pulling latest changes..."
+    git pull || echo "⚠️  git pull failed, continuing..."
+else
+    echo "⚠️  Not a git repository, skipping pull"
 fi
 
-# Restow configurations
-echo "🔗 Restowing configurations..."
-./scripts/install.sh
+# Re-stow configs
+echo ""
+echo "🔗 Re-stowing configurations..."
+"$REPO_ROOT/scripts/install.sh"
 
 # Update Fish plugins
-if command -v fish &>/dev/null; then
+if command -v fish &>/dev/null && fish -c "functions -q fisher" 2>/dev/null; then
     echo ""
-    echo "📦 Updating Fish plugins..."
-    fish -c "fisher update"
-    echo "✓ Fish plugins updated"
+    echo "🐟 Updating Fish plugins..."
+    fish -c "fisher update" 2>/dev/null || echo "⚠️  Fisher update failed"
 fi
 
-# Update fonts
-echo ""
-read -p "Update fonts? (y/N): " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    ./scripts/install-fonts.sh
+# Optionally update fonts
+read -rp "Update fonts? (y/N): " font_reply || true
+if [[ ${font_reply:-} =~ ^[Yy]$ ]]; then
+    "$REPO_ROOT/scripts/install-fonts.sh"
 fi
 
 echo ""
