@@ -2,6 +2,15 @@
   // ═══════════════════════════════════════════════════════════════════════════
   // APPEARANCE (keeping your preferences)
   // ═══════════════════════════════════════════════════════════════════════════
+  "agent_servers": {
+    "opencode": {
+      "type": "registry"
+    },
+    "kimi": {
+      "type": "registry"
+    }
+  },
+  "proxy": "",
   "language_models": {
     "openai_compatible": {
       "MiniMax": {
@@ -25,21 +34,21 @@
     }
   },
   "edit_predictions": {
-    "provider": "zed"
+    "provider": "none"
   },
   "disable_ai": false,
   "theme": {
-    "mode": "system",
-    "light": "Dayfox - blurred",
-    "dark": "Ayu Dark"
+    "mode": "dark",
+    "light": "Ember Glass",
+    "dark": "Moonlight Italic"
   },
   "icon_theme": {
     "mode": "system",
     "light": "Light Charmed Icons",
     "dark": "Catppuccin Mocha"
   },
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
+  "ui_font_size": 16.0,
+  "buffer_font_size": 22.0,
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "ui_font_family": "JetBrainsMono Nerd Font",
   "buffer_line_height": {
@@ -49,7 +58,7 @@
   // ═══════════════════════════════════════════════════════════════════════════
   // EDITOR
   // ═══════════════════════════════════════════════════════════════════════════
-  "vim_mode": true,
+  "vim_mode": false,
   "relative_line_numbers": "enabled",
   "cursor_blink": false,
   "preferred_line_length": 100,
@@ -159,8 +168,8 @@
   // ═══════════════════════════════════════════════════════════════════════════
   "window_decorations": "client",
   "title_bar": {
+    "show_branch_status_icon": true,
     "show_menus": true,
-    "show_branch_icon": true,
     "show_project_name": true,
     "show_branch_name": true
   },
@@ -176,11 +185,9 @@
   // TERMINAL
   // ═══════════════════════════════════════════════════════════════════════════
   "terminal": {
-    "shell": {
-      "program": "fish"
-    },
+    "shell": "system",
     "font_family": "JetBrainsMono Nerd Font",
-    "font_size": 14,
+    "font_size": 17.0,
     "copy_on_select": true,
     "env": {
       "EDITOR": "zed --wait"
