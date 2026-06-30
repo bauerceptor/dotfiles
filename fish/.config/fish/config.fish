@@ -1,6 +1,6 @@
 # =============================================================================
 # Modern Fish Shell Configuration
-# Fedora 43 | Fish 4.2.0+
+# Distro-agnostic (works on Fedora, Debian, Arch, etc.)
 # =============================================================================
 
 # Auto-install Fisher + plugins on new machine
@@ -18,26 +18,24 @@ else if test -d /opt/homebrew
     eval (/opt/homebrew/bin/brew shellenv)
 end
 
+# Cargo/Rust (distro-agnostic)
+if test -f "$HOME/.cargo/env"
+    # cargo/env is a shell script, source it in sh or set PATH directly
+    set -gx PATH "$HOME/.cargo/bin" $PATH
+end
+
 # SSH Agent
 if test -z "$SSH_AUTH_SOCK"
     eval (ssh-agent -c) > /dev/null
 end
 
-# mise activation (add near top, before other tools)
-if type -q mise
-    mise activate fish | source
-end
+
 
 
 if status is-interactive
     # =========================================================================
     # Tool Initializations (order matters!)
     # =========================================================================
-
-    # Zoxide (smarter cd) - replaces z/autojump
-    if type -q zoxide
-        zoxide init fish | source
-    end
 
     # Direnv (per-project environment variables)
     if type -q direnv
@@ -147,6 +145,14 @@ if status is-interactive
         end
     end
 
+    # Opencode CLI
+    fish_add_path -g "$HOME/.opencode/bin"
+
+    # mise activation (must run after PATH is set)
+    if type -q mise
+        mise activate fish | source
+    end
+
     # =========================================================================
     # Disable greeting
     # =========================================================================
@@ -159,5 +165,8 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
-fish_add_path -g "$HOME/.local/bin"
-fish_add_path -g "$HOME/.local/share/fnm"
+
+# Zoxide (smarter cd) - initialized last per doctor recommendation
+if type -q zoxide
+    zoxide init fish | source
+end
