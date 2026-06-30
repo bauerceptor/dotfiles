@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════════════════════
-# ~/.bashrc - Modern CLI Setup
+# ~/.bashrc - Modern CLI Setup (Distro-Agnostic)
 # ═══════════════════════════════════════════════════════════════════════════
 
 # Source global definitions
@@ -21,8 +21,6 @@ export PATH="$HOME/.cargo/bin:$HOME/go/bin:$HOME/.opencode/bin:$PATH"
 
 # ═══════════════════════════════════════════════════════════════════════════
 # ble.sh SHELL AUTOCOMPLETIONS
-# ═══════════════════════════════════════════════════════════════════════════
-
 # Auto-install ble.sh if not present
 if [[ $- == *i* ]] && [[ ! -f ~/.local/share/blesh/ble.sh ]]; then
     echo "Installing ble.sh..."
@@ -31,8 +29,8 @@ if [[ $- == *i* ]] && [[ ! -f ~/.local/share/blesh/ble.sh ]]; then
     rm -rf /tmp/ble.sh
 fi
 
-# Load ble.sh (at TOP of file)
-[[ $- == *i* ]] && [[ -f ~/.local/share/blesh/ble.sh ]] && source ~/.local/share/blesh/ble.sh
+# Load ble.sh (at TOP of file) - DISABLED due to auto-execute issue
+# [[ $- == *i* ]] && [[ -f ~/.local/share/blesh/ble.sh ]] && source ~/.local/share/blesh/ble.sh
 
 
 
@@ -98,9 +96,6 @@ command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion bash)"
 [[ -f "$HOME/.atuin/bin/env" ]] && . "$HOME/.atuin/bin/env"
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 command -v atuin &>/dev/null && eval "$(atuin init bash)"
-
-# Zoxide (smart cd)
-command -v zoxide &>/dev/null && eval "$(zoxide init bash)"
 
 # Direnv (per-directory env)
 command -v direnv &>/dev/null && eval "$(direnv hook bash)"
@@ -742,7 +737,7 @@ eval "$(starship init bash)"
 [[ ${BLE_VERSION-} ]] && ble-attach
 
 # pnpm
-export PNPM_HOME="/home/red/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -750,12 +745,44 @@ esac
 # pnpm end
 
 # fnm
-FNM_PATH="/home/red/.local/share/fnm"
+if [ -d "$HOME/.local/share/fnm" ]; then
+    export PATH="$HOME/.local/share/fnm:$PATH"
+    command -v fnm &>/dev/null && eval "$(fnm env --shell bash)"
+fi
+
+# uv shell completions
+command -v uv &>/dev/null && eval "$(uv generate-shell-completion bash)"
+command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion bash)"
+
+# Local bin
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# sbin for reboot, poweroff, etc.
+export PATH="/sbin:/usr/sbin:$PATH"
+
+# fnm
+FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"
   eval "$(fnm env --shell bash)"
 fi
-eval "$(uv generate-shell-completion bash)"
-eval "$(uvx --generate-shell-completion bash)"
+eval "$($HOME/.local/bin/mise activate bash)"
+
+# Zoxide (smart cd) - initialized last per doctor recommendation
+command -v zoxide &>/dev/null && {
+    eval "$(zoxide init bash)"
+    alias cd='z'
+}
+
+# kimi-code
+export PATH="$HOME/.kimi-code/bin:$PATH"
+
+# Qwen Code PATH block begin
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.local/share/fnm:$PATH"
+# Qwen Code PATH block end
