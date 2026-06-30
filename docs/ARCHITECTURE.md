@@ -5,7 +5,7 @@ Understanding how these dotfiles are organized and how they work.
 ## 📐 Design Principles
 
 1. **Platform Agnostic** - No hardcoded paths, works across systems
-2. **Distro Agnostic** - Package manager abstraction for portability
+2. **Distro Focused** - Supports dnf (Fedora/RHEL) and apt (Debian/Ubuntu)
 3. **Modular** - Each tool in its own directory
 4. **Stow-Based** - Uses GNU Stow for symlink management
 5. **Automated** - Scripts for installation and updates
@@ -24,12 +24,24 @@ Understanding how these dotfiles are organized and how they work.
 │   └── .bashrc.d/
 │       └── package-manager.sh
 │
+├── distrobox/              # Distrobox container defaults
+│   └── .config/distrobox/
+│       └── distrobox.conf
+│
+├── dolphin/                # Dolphin file manager
+│   └── .config/
+│       └── dolphinrc
+│
 ├── fish/                   # Fish shell
 │   └── .config/fish/
 │       ├── config.fish
 │       ├── fish_plugins
 │       ├── conf.d/
 │       └── functions/
+│
+├── fuzzel/                 # Fuzzel launcher
+│   └── .config/fuzzel/
+│       └── fuzzel.ini
 │
 ├── ghostty/                # Ghostty terminal
 │   └── .config/ghostty/
@@ -40,6 +52,14 @@ Understanding how these dotfiles are organized and how they work.
 │       ├── config.toml
 │       └── languages.toml
 │
+├── kate/                   # Kate editor
+│   └── .config/
+│       └── kate*
+│
+├── konsole/                # Konsole terminal
+│   ├── .config/konsolerc
+│   └── .local/share/konsole/
+│
 ├── lazygit/                # LazyGit TUI
 │   └── .config/lazygit/
 │       └── config.yml
@@ -47,6 +67,11 @@ Understanding how these dotfiles are organized and how they work.
 ├── lazyvim/                # Neovim (LazyVim)
 │   └── .config/nvim/
 │       └── [LazyVim files]
+│
+├── rofi/                   # Rofi launcher
+│   └── .config/rofi/
+│       ├── config.rasi
+│       └── theme.rasi
 │
 ├── starship/               # Starship prompt
 │   └── .config/
@@ -58,7 +83,7 @@ Understanding how these dotfiles are organized and how they work.
 │   ├── generated/          # Auto-generated configs
 │   └── README.md
 │
-├── vscode/                 # Visual Studio Code
+├── vscode/                 # Visual Studio Code / VSCodium
 │   └── .config/Code/User/
 │       ├── settings.json
 │       └── keybindings.json
@@ -81,7 +106,8 @@ Understanding how these dotfiles are organized and how they work.
 │   ├── update.sh
 │   ├── check-deps.sh
 │   ├── switch-theme.sh
-│   └── install-fonts.sh
+│   ├── install-fonts.sh
+│   └── distrobox-create.sh
 │
 ├── docs/                   # Documentation
 │   ├── INSTALLATION.md
@@ -185,8 +211,6 @@ if command -v dnf; then
     alias pkgi='sudo dnf install'
 elif command -v apt; then
     alias pkgi='sudo apt install'
-elif command -v pacman; then
-    alias pkgi='sudo pacman -S'
 fi
 ```
 
@@ -228,11 +252,11 @@ User runs: ./scripts/update.sh
 ```
 User runs: ./scripts/bootstrap.sh
 
-1. Detect Linux distribution
-2. Detect package manager (dnf/apt/pacman)
-3. Install core dependencies (git, stow, curl, wget)
-4. Install modern CLI tools (eza, bat, fd, rg, etc.)
-5. Install Nerd Fonts
+1. Detect Linux distribution (Fedora/RHEL or Debian/Ubuntu)
+2. Detect package manager (dnf or apt)
+3. Install core dependencies (git, stow, curl, wget, unzip, fontconfig)
+4. Install modern CLI tools (eza, bat, fd, rg, distrobox, zellij, etc.)
+5. Install Nerd Fonts (JetBrainsMono and Lilex only)
 6. Offer to set Fish as default shell
 
 Then: ./scripts/install.sh
@@ -280,6 +304,7 @@ stow newtool
 `.gitignore` excludes:
 - Fish variables (user-specific)
 - LazyVim generated files
+- Font archives (*.zip)
 - OS files (.DS_Store, Thumbs.db)
 - Editor temp files (*.swp, *~)
 - Secrets (.env, *.key, *.pem)
